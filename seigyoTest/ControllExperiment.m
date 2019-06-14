@@ -9,10 +9,13 @@
 %ylabel('ylabel')
 % ***step(num, den, t); %
 
-filename = "2019052804.csv";
+%filename = "2019052804.csv";
+filename = "20190614.csv"
 m = csvread(filename);
 m
-plot(m(:, 1), m(:,2));
+plot(m(:, 1), m(:,4));
+
+plot(m(:, 1), m(:,3));
 grid
-ylabel('水位[cm]')
+ylabel('入流量')
 xlabel('ステップ数')
