@@ -13,9 +13,9 @@
 filename = "20190614.csv"
 m = csvread(filename);
 m
-plot(m(:, 1), m(:,4));
+plot(m(:, 1), m(:,4), '-', m(:,1),m(:,3),'--');
 
-plot(m(:, 1), m(:,3));
+%text(6.1, 5.0, '推定値')
 grid
-ylabel('入流量')
+ylabel('出力電圧')
 xlabel('ステップ数')
