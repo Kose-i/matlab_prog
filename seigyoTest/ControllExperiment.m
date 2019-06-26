@@ -9,13 +9,22 @@
 %ylabel('ylabel')
 % ***step(num, den, t); %
 
-%filename = "2019052804.csv";
-filename = "20190614.csv"
+filename = "ex4.csv";
 m = csvread(filename);
 m
-plot(m(:, 1), m(:,4), '-', m(:,1),m(:,3),'--');
-
-%text(6.1, 5.0, '推定値')
+plot(m(:, 1), m(:,2), 'o',m(:, 1), m(:,2), '-');
 grid
-ylabel('出力電圧')
-xlabel('ステップ数')
+ylabel('水位[cm]')
+xlabel('出力電圧[v]')
+
+
+%filename = "2019052804.csv";
+%%filename = "20190614.csv"
+%m = csvread(filename);
+%m
+%plot(m(:, 1), m(:,4), '-', m(:,1),m(:,3),'--');
+%
+%%text(6.1, 5.0, '推定値')
+%grid
+%ylabel('出力電圧[v]')
+%xlabel('ステップ数')
