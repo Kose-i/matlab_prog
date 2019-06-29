@@ -1,4 +1,4 @@
-filename = "SakuzuDate.csv"
+filename = "stepGraph.csv"
 matrix = csvread(filename)
 
 t = matrix(:,1);
@@ -8,10 +8,10 @@ data_five = matrix(:,4);
 data_ten = matrix(:,5);
 
 hold on
-plot(t,data_jikken)
-plot(t,data_zero)
-plot(t,data_five)
-plot(t,data_ten)
+plot(t,data_jikken, '-')
+plot(t,data_zero, '-o')
+plot(t,data_five, '-x')
+plot(t,data_ten,'-*')
 
 ylabel('角度[deg]')
 xlabel('時点')
