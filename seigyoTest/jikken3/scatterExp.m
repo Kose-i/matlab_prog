@@ -26,6 +26,15 @@ plot(t(1:size(t)), y)
 %plot(t(1:size(t)-5), y)
 %plot(t(1:size(t)-9), y)
 
+size(t)
+
+display_x = t(20:24)
+display_y_1 = [2.7,2.7,2.7,2.7,2.7];
+display_y_2 = [2.5];
+
+plot(display_x, display_y_1, '-')
+plot(t(23), display_y_2, 'o')
+
 hold off
 
 %data_u = zeros(size(t)-5);
