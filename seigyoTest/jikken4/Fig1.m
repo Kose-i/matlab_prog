@@ -1,12 +1,28 @@
 
-K1 = 0.01:0.01:0.1;
-K2 = 0.1:0.1:1;
-K3 = 1:1:10;
+sys = tf([1], [1, 1])
 
-K = [K1 K2 K3];
+opt = bodeoptions
+opt.Xlim = [0.01, 10];
+opt.Ylim = [0, 30];
+opt.YLabel.String(1) = cellstr("20log_{10}|G(j\omega)|");
+opts.YLabel.String(2) = cellstr("\angleG(j\omega)");
 
-sys = tf([10], [0.5, 1])
+opts.XLabel.String = "\omega";
 
-bode(sys, K);
+%bode(sys, opts)
+[mag, phase, wout] =bode(sys);
 
-xlabel('ω')
+magdb = 20*log10(mag)
+semilogx(wout, magdb(:,:))
+%semilogx(wout, phase(:,:))
+
+%semilogx(mag)
+
+%hline = refline(0, -45)
+%hline.LineStyle = '--'
+
+%opts.TickLabel
+
+
+%gtext("\fontsize{10} 折点周波数\omega_d=1/T");
+%gtext("低周波数ゲインk=20log_{10}k");
