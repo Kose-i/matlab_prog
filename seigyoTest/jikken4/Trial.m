@@ -7,7 +7,8 @@ K3 = 1:1:10;
 
 w = [K2,K3];
 
-sys = tf([1], [0.00108,0.274, 1])
+sys = tf([1], [0.301, 1])%T = 0.301
+%sys = tf([1], [0.00162,0.276, 1])%T1 = 0.27, T2 = 0.006
 
 [mag, phase] = bode(sys, w)
 figure;
@@ -32,8 +33,8 @@ ylabel('\angleG(j\omega)[deg]');
 x = matrix(:,1)
 y = matrix(:,4)
 scatter(x, y)
-hline = refline(0,-45)
-hline.LineStyle = '--'
+%hline = refline(0,-45)
+%hline.LineStyle = '--'
 ylim=[-90, 0]
 yticks([-90,-45, 0])
 yticklabels({-90,-45, 0})
