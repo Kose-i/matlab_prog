@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.14159265-p3.7.1-161114-2.6 (utf8.euc) (TeX Live 2017/Debian) (preloaded format=platex 2019.6.25)  16 OCT 2019 19:21
+This is e-pTeX, Version 3.14159265-p3.7.1-161114-2.6 (utf8.euc) (TeX Live 2017/Debian) (preloaded format=platex 2019.6.25)  17 OCT 2019 19:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -73,18 +73,20 @@ LaTeX Font Info:    Checking defaults for JY1/mc/m/n on input line 3.
 LaTeX Font Info:    ... okay on input line 3.
 LaTeX Font Info:    Checking defaults for JT1/mc/m/n on input line 3.
 LaTeX Font Info:    ... okay on input line 3.
-File: ../img/FigB1.png Graphic file (type bmp)
-<../img/FigB1.png>
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 5.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 5.
  [1
 
 ] (./test.aux) ) 
 Here is how much of TeX's memory you used:
- 639 strings out of 494735
- 7638 string characters out of 6176126
- 61599 words of memory out of 5000000
- 4198 multiletter control sequences out of 15000+600000
+ 629 strings out of 494735
+ 7539 string characters out of 6176126
+ 64599 words of memory out of 5000000
+ 4197 multiletter control sequences out of 15000+600000
  7511 words of font info for 31 fonts, out of 8000000 for 9000
  264 hyphenation exceptions out of 8191
- 25i,4n,21p,197b,158s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 25i,8n,21p,197b,217s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on test.dvi (1 page, 340 bytes).
+Output written on test.dvi (1 page, 1620 bytes).

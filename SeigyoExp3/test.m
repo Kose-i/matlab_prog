@@ -1,7 +1,7 @@
+K_p = 0.02490842
 % 変更するデータ
-K_p = 0.025
-T_p = 1477
-L_p = 3
+T_p = 1508.1695
+L_p = 34.187143
 
 data = readmatrix("datasets/bc.CSV")
 %time_table = [0:736]
@@ -44,7 +44,7 @@ plot(t,y)
 Error = 0
 size_for = size(y)
 for c = 1:size_for
-    minus = y(c) - tmp_data(c)
+    minus = abs(y(c) - tmp_data(c))
     if minus ~= 0
         nowError = minus / tmp_data(c)
         Error = Error + nowError

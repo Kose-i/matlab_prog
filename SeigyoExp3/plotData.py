@@ -7,8 +7,8 @@ import pandas as pd
 #変更するパラメータ
 data_num  = 4 # 使用するデータ番号0~4
 start_pos = 20  # 傾きの始まる点
-end_pos   = 65 # 傾きの終わる点
-sampling_ratio = 15 # サンプリングの周期
+end_pos   = 200 # 傾きの終わる点
+sampling_ratio = 13 # サンプリングの周期
 method_n = 1 # 前nと後nの平均値を取る # 1以外については未実装
 
 
