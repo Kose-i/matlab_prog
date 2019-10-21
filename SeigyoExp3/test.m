@@ -1,7 +1,7 @@
-K_p = 0.02490842
+K_p = 2.490842
 % 変更するデータ
-T_p = 1508.1695
-L_p = 34.187143
+T_p = 1508.1695498
+L_p = 34.1871433799
 
 data = readmatrix("datasets/bc.CSV")
 %time_table = [0:736]
@@ -13,6 +13,9 @@ data = readmatrix("datasets/bc.CSV")
 %plot(data(:,4))
 %plot(data(:,5))
 tmp_data = data(:,5)
+for c = 1:size(tmp_data)
+  tmp_data(c) = tmp_data(c)*100
+end
 %t = ones(size(data(:,1)))
 %t *= 2
 t_size = size(tmp_data)
@@ -36,7 +39,7 @@ opt = stepDataOptions('StepAmplitude',50)
 [y,t] = step(sys,t,opt)
 
 for c = 1:t_size(1)
-    y(c) = y(c) + data(1,1)
+    y(c) = y(c) + tmp_data(1)
 end
 
 plot(t,y)

@@ -40,7 +40,7 @@ def modify_error(data, diff_period=1):
     # 外側diff_period個については使えない(使い物にならないデータになる)
     return sum([data[0:-2], data[1:-1], data[2:]])/3
 
-mat = np.array(csv_read('datasets/bc.CSV'))
+mat = np.array(csv_read('datasets/bc.CSV'))*100
 time_mat = np.array(range(0, len(mat)))*10
 #print(mat)
 #print(len(mat))
