@@ -1,7 +1,8 @@
 K_p = 2.490842
 % 変更するデータ
-T_p = 1508.1695498
-L_p = 34.1871433799
+T_p = 1550.10406803
+L_p = 41.0862057588
+data_num = 5 %1=5
 
 data = readmatrix("datasets/bc.CSV")
 %time_table = [0:736]
@@ -12,7 +13,7 @@ data = readmatrix("datasets/bc.CSV")
 %plot(data(:,3))
 %plot(data(:,4))
 %plot(data(:,5))
-tmp_data = data(:,5)
+tmp_data = data(:,data_num)
 for c = 1:size(tmp_data)
   tmp_data(c) = tmp_data(c)*100
 end
