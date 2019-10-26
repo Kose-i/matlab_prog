@@ -1,19 +1,14 @@
-#coding:utf-8
-import csv
+import csv # csvモジュールをインポート
 
-f = open('data.csv', 'ab') #ファイルが無ければ作る、の'a'を指定します
+stock = [["Apple", 24], ["Banana", 14], ["Orange", 8]] # 二重のリスト
 
-csvWriter = csv.writer(f)
+time_table = range(0,10)
+time_box   = range(0,10)
 
-val = 0
-for num in range(1, 5):
-   listData = []
-   val = num
-   for loop in range(0, 5):
-      val = val * 10 + num
-      listData.append(val)
-      s = str(','.join(str(listData))
-      print(s)
-      csvWriter.writerow(s)
-
-f.close()
+with open("stock.csv", "w", encoding="Shift_jis") as f: # 文字コードをShift_JISに指定
+  writer = csv.writer(f, lineterminator="\n") # writerオブジェクトの作成 改行記号で行を区切る
+  stock_tmp = []
+  for t in time_table:
+    stock_t = [t, time_box[t]]
+    stock_tmp.append(stock_t)
+  writer.writerows(stock_tmp) # csvファイルに書き込み
