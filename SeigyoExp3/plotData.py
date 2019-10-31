@@ -3,12 +3,15 @@ import csv
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+from matplotlib import rcParams
+rcParams['xtick.direction'] = 'in'
+rcParams['ytick.direction'] = 'in'
 
 #変更するパラメータ
 data_num  = 4 # 使用するデータ番号0~4
 start_pos = 20  # 傾きの始まる点
 end_pos   = 200 # 傾きの終わる点
-sampling_ratio = 14 # サンプリングの周期
+sampling_ratio = 29 # サンプリングの周期
 method_n = 1 # 前nと後nの平均値を取る # 1以外については未実装
 
 
@@ -47,17 +50,34 @@ def modify_error(data, diff_period=1):
     # 外側diff_period個については使えない(使い物にならないデータになる)
     return sum([data[0:-2], data[1:-1], data[2:]])/3
 
-def error_sum(data, t_data, K_p, T_p, L_p):
+def error_sum(data, t_data, K_p=2.4908, T_p=1516.3, L_p=23.0744):
     c = 50*K_p*(1-np.exp(-(t_data-L_p)/T_p))+data[0]
-    sum_diff = sum([abs(e-f)/f for e,f in zip(data, c)])/len(data)
+    sum_diff = sum([abs(e-f)/e for e,f in zip(data, c)])/len(data)
     return sum_diff
 
+#
+#mat = np.array(csv_read('datasets/bc_controll.CSV'))*100
+#time_mat = np.array(range(0, len(mat)))*10
+#data1 = mat[:,data_num]
+#plt.plot(time_mat, data1)
+#plt.xlabel("t [s]")
+#plt.xticks(range(0,4000,1000))
+#plt.yticks(range(20,80,10))
+#plt.ylabel("Θ [℃]")
+#plt.show()
+#
 mat = np.array(csv_read('datasets/bc.CSV'))*100
 time_mat = np.array(range(0, len(mat)))*10
 #print(mat)
 #print(len(mat))
 #print(len(mat[0]))
 data1 = mat[:,data_num] #TODO DATA番号
+#plt.plot(time_mat, data1)
+#plt.xlabel("t [s]")
+#plt.xticks(range(0,8000,1000))
+#plt.yticks(range(0,170,10))
+#plt.ylabel("Θ [℃]")
+#plt.show()
 #print(len(data1))
 #print(len(data1[0]))
 
@@ -68,7 +88,7 @@ print("サンプリング周期[s]:",sampling_ratio*10)
 print("適用範囲:",start_pos*10,"[s]-",end_pos*10,"[s]")
 
 # 適用範囲を確認
-plt.plot(time_mat, mat)
+#plt.plot(time_mat, mat)
 x_warn = [start_pos*10, end_pos*10]
 y_warn = [data1[start_pos], data1[end_pos]]
 #plt.scatter(x_warn, y_warn, marker='o')
@@ -96,8 +116,20 @@ log_data = np.log(data_diff)
 
 plt.plot(sample_time,log_data)
 a,b = a_b(mat_x=sample_time, mat_y=log_data)
-x = np.linspace(10*start_pos,end_pos*10,10)
+x = np.linspace(10*start_pos,end_pos*10-sampling_ratio*10,10)
 y = a*x + b 
+plt.plot(x, y, linestyle="dashed")
+
+# 軸ラベル
+tmp_x = np.array(range(100, 200, 10))
+tmp_y = 0*tmp_x + 2
+plt.plot(tmp_x, tmp_y)
+tmp_x = np.array(range(100, 200, 10))
+tmp_y = 0*tmp_x + 1.9
+plt.plot(tmp_x, tmp_y, linestyle="dashed")
+plt.text(x=220, y=2.00-0.01, s="実測値")
+plt.text(x=220, y=1.90-0.01, s="y=ax+b")
+
 print("a:", a, ", b:",b)
 #print("end:", mat[-1, data_num], "start:",mat[0, data_num])
 K_p = (mat[-1, data_num] - mat[0, data_num]) / 50
@@ -107,8 +139,12 @@ print("T_p:",T_p)
 L_p = T_p*(b-np.log(50*K_p*(1-np.exp(-sampling_ratio*10/T_p))))
 print("L_p:", L_p)
 
-#plt.plot(x,y)
-#plt.show()
+plt.xlabel("t[s]")
+plt.ylabel("z(t)")
+#plt.xticks(range(0))
+plt.yticks([1.8,2.0,2.2,2.4,2.6,2.8,2.8, 3.0, 3.2])
+plt.show()
 
 error_t = error_sum(data1, time_mat ,K_p=K_p, T_p=T_p, L_p=L_p)
-print("error:" ,error_t)
+#error_t = error_sum(data1, time_mat)
+print("error[%]:" ,error_t*100)

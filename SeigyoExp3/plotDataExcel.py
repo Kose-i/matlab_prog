@@ -8,11 +8,12 @@ import pandas as pd
 data_num  = 4 # 使用するデータ番号0~4
 start_pos = 20  # 傾きの始まる点
 end_pos   = 200 # 傾きの終わる点
-sampling_ratio = 20 # サンプリングの周期
+sampling_ratio = 29 # サンプリングの周期
 method_n = 1 # 前nと後nの平均値を取る # 1以外については未実装
-filename1 = 'output/sampling200/output1.csv'
-filename2 = 'output/sampling200/output2.csv'
-filename3 = 'output/sampling200/output3.csv'
+#filename1 = 'output/sampling290/output1.csv'
+#filename2 = 'output/sampling290/z-t_sampling200s.csv'
+filename2 = 'output/z-t_sampling290s.csv'
+#filename3 = 'output/sampling290/output3.csv'
 
 
 def csv_read(filename):
@@ -67,7 +68,8 @@ def main():
     data_diff = next_sample_data - prev_sample_data
     log_data = np.log(data_diff)
     
-    #plt.plot(sample_time,log_data)
+    plt.plot(sample_time,log_data)
+    plt.show()
     a,b = a_b(mat_x=sample_time, mat_y=log_data)
     x = np.linspace(10*start_pos,end_pos*10,10)
     y = a*x + b 
@@ -84,49 +86,50 @@ def main():
     print("相対誤差平均:" ,error_t*100, "[%]")
     
     # 保持するデータ
-    with open(filename1, "w", encoding="Shift_jis") as f: # 文字コードをShift_JISに指定
-      writer = csv.writer(f, lineterminator="\n") # writerオブジェクトの作成 改行記号で行を区切る
-      writer.writerows([["time[s]","data(t-1)[degree]","data(t)", "data(t+1)","Average"]])
-      stock_tmp = []
-      for time_data,past_data,now_data,future_data,average_data in zip(time_mat, data1[2:], data1[1:-1], data1[:-2],sum([data1[2:],data1[1:-1],data1[:-2]])/3):
-        stock_t = [time_data, past_data, now_data, future_data,average_data]
-        stock_tmp.append(stock_t)
-      writer.writerows(stock_tmp) # csvファイルに書き込み
+#    with open(filename1, "w", encoding="Shift_jis") as f: # 文字コードをShift_JISに指定
+#      writer = csv.writer(f, lineterminator="\n") # writerオブジェクトの作成 改行記号で行を区切る
+#      writer.writerows([["time[s]","data(t-1)[degree]","data(t)", "data(t+1)","Average"]])
+#      stock_tmp = []
+#      for time_data,past_data,now_data,future_data,average_data in zip(time_mat, data1[2:], data1[1:-1], data1[:-2],sum([data1[2:],data1[1:-1],data1[:-2]])/3):
+#        stock_t = [time_data, past_data, now_data, future_data,average_data]
+#        stock_tmp.append(stock_t)
+#      writer.writerows(stock_tmp) # csvファイルに書き込み
     # 保持するデータ
     with open(filename2, "w", encoding="Shift_jis") as f: # 文字コードをShift_JISに指定
       writer = csv.writer(f, lineterminator="\n") # writerオブジェクトの作成 改行記号で行を区切る
-      writer.writerows([["sample_time","data_(t+h)","data_(t)","data_([t+h]-[t])","log_data"]])
+      #writer.writerows([["sample_time","data_(t+h)","data_(t)","data_([t+h]-[t])","log_data"]])
+      writer.writerows([["sample_time","log_data"]])
       stock_tmp = []
-      for st,nd,pd,df,ld in zip(sample_time, next_sample_data,prev_sample_data, data_diff, log_data):
-        stock_t = [st, nd, pd, df, ld]
+      for st,ld in zip(sample_time, log_data):
+        stock_t = [st, ld]
         stock_tmp.append(stock_t)
       writer.writerows(stock_tmp) # csvファイルに書き込み
     # 保持するデータ
-    with open(filename3, "w", encoding="Shift_jis") as f: # 文字コードをShift_JISに指定
-      writer = csv.writer(f, lineterminator="\n") # writerオブジェクトの作成 改行記号で行を区切る
-      n = len(sample_time)
-      sum_x = sum(sample_time)
-      sum_y = sum(log_data)
-      sum_x_double = sum(sample_time**2)
-      sum_xy = sum(sample_time*log_data)
-      a_grad    = (n*sum_xy - sum_x*sum_y) / (n*sum_x_double - (sum_x)**2)
-      b_section = (sum_x_double*sum_y - sum_xy*sum_x) / (n*sum_x_double - (sum_x)**2)
-      writer.writerows([["n",n]])
-      writer.writerows([["sum(x)",sum_x]])
-      writer.writerows([["sum(y)",sum_y]])
-      writer.writerows([["sum(x^2)",sum_x_double]])
-      writer.writerows([["sum(x*y)",sum_xy]])
-      writer.writerows([["a",a_grad]])
-      writer.writerows([["b",b_section]])
-      writer.writerows([["K_p",K_p]])
-      writer.writerows([["T_p",T_p]])
-      writer.writerows([["L_p",L_p]])
+#    with open(filename3, "w", encoding="Shift_jis") as f: # 文字コードをShift_JISに指定
+#      writer = csv.writer(f, lineterminator="\n") # writerオブジェクトの作成 改行記号で行を区切る
+#      n = len(sample_time)
+#      sum_x = sum(sample_time)
+#      sum_y = sum(log_data)
+#      sum_x_double = sum(sample_time**2)
+#      sum_xy = sum(sample_time*log_data)
+#      a_grad    = (n*sum_xy - sum_x*sum_y) / (n*sum_x_double - (sum_x)**2)
+#      b_section = (sum_x_double*sum_y - sum_xy*sum_x) / (n*sum_x_double - (sum_x)**2)
+#      writer.writerows([["n",n]])
+#      writer.writerows([["sum(x)",sum_x]])
+#      writer.writerows([["sum(y)",sum_y]])
+#      writer.writerows([["sum(x^2)",sum_x_double]])
+#      writer.writerows([["sum(x*y)",sum_xy]])
+#      writer.writerows([["a",a_grad]])
+#      writer.writerows([["b",b_section]])
+#      writer.writerows([["K_p",K_p]])
+#      writer.writerows([["T_p",T_p]])
+#      writer.writerows([["L_p",L_p]])
     return error_t
 
 if __name__=='__main__':
-    mini_c = 0
-    mini_tmp = 1000
-    sampling_ratio = 20
+#    mini_c = 0
+#    mini_tmp = 1000
+#    sampling_ratio = 20
     main()
     #print("sampling_ratio:",mini_c)
     #print("error:", mini_tmp)
