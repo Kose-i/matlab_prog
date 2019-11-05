@@ -60,35 +60,31 @@ def error_sum(data, t_data, K_p=2.4908, T_p=1516.3, L_p=23.0744):
     sum_diff = sum([abs(e-f)/e for e,f in zip(data, c)])/len(data)
     return sum_diff
 
-# Control_Exp.png
-mat = np.array(csv_read('datasets/bc_controll.CSV'))*100
-time_mat = np.array(range(0, len(mat)))*10
 data1 = mat[:,data_num]
-y = 0*time_mat+59.15
-plt.plot(time_mat, data1)
-plt.plot(time_mat, y, linestyle="dashed")
-plt.xlabel("t [s]")
-plt.xticks(range(0,4000,1000))
-plt.yticks(range(20,80,10))
-#plt.axis(xmin=0, xmax, ymin, ymax)
-plt.axis(xmin=0, xmax=2300)
-plt.ylabel("Θ [℃]")
-tmp_x = np.array(range(1400, 1600, 100))
-tmp_y = 0*tmp_x + 30
-plt.plot(tmp_x, tmp_y)
-tmp_y = 0*tmp_x + 27
-plt.plot(tmp_x, tmp_y, linestyle="dashed")
-plt.text(x=1530, y=30.5-1, s="実測値")
-plt.text(x=1530, y=27.5-1, s="Θ(t)=59.15")
-plt.show()
+## Control_Exp.png
+#mat = np.array(csv_read('datasets/bc_controll.CSV'))*100
+#time_mat = np.array(range(0, len(mat)))*10
+#y = 0*time_mat+59.15
+#plt.plot(time_mat, data1)
+#plt.plot(time_mat, y, linestyle="dashed")
+#plt.xlabel("t [s]")
+#plt.xticks(range(0,4000,1000))
+#plt.yticks(range(20,80,10))
+##plt.axis(xmin=0, xmax, ymin, ymax)
+#plt.axis(xmin=0, xmax=2300)
+#plt.ylabel("Θ [℃]")
+#tmp_x = np.array(range(1400, 1600, 100))
+#tmp_y = 0*tmp_x + 30
+#plt.plot(tmp_x, tmp_y)
+#tmp_y = 0*tmp_x + 27
+#plt.plot(tmp_x, tmp_y, linestyle="dashed")
+#plt.text(x=1530, y=30.5-1, s="実測値")
+#plt.text(x=1530, y=27.5-1, s="Θ(t)=59.15")
+#plt.show()
 #
 mat = np.array(csv_read('datasets/bc.CSV'))*100
 time_mat = np.array(range(0, len(mat)))*10
-#print(mat)
-#print(len(mat))
-#print(len(mat[0]))
 
-data1 = mat[:,data_num] #TODO DATA番号
 ## Identification.png
 #plt.plot(time_mat, data1)
 #plt.xlabel("t [s]")
