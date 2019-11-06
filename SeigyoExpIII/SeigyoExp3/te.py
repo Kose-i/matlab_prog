@@ -85,7 +85,7 @@ if __name__=='__main__':
     mini_c = 0
     mini_tmp = 1000
     sampling_ratio = 2
-    while sampling_ratio<31:
+    while sampling_ratio<41:
         tmp = main()
         if tmp < mini_tmp:
             mini_tmp = tmp

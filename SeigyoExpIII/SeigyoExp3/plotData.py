@@ -60,7 +60,6 @@ def error_sum(data, t_data, K_p=2.4908, T_p=1516.3, L_p=23.0744):
     sum_diff = sum([abs(e-f)/e for e,f in zip(data, c)])/len(data)
     return sum_diff
 
-data1 = mat[:,data_num]
 ## Control_Exp.png
 #mat = np.array(csv_read('datasets/bc_controll.CSV'))*100
 #time_mat = np.array(range(0, len(mat)))*10
@@ -83,6 +82,7 @@ data1 = mat[:,data_num]
 #plt.show()
 #
 mat = np.array(csv_read('datasets/bc.CSV'))*100
+data1 = mat[:,data_num]
 time_mat = np.array(range(0, len(mat)))*10
 
 ## Identification.png
@@ -130,21 +130,24 @@ data_diff = next_sample_data - prev_sample_data
 log_data = np.log(data_diff)
 
 a,b = a_b(mat_x=sample_time, mat_y=log_data)
-##z-t200s.png
-#x = np.linspace(10*start_pos,end_pos*10-sampling_ratio*10,10)
-#y = a*x + b 
-#plt.plot(x,y,linestyle="dashed")
-#plt.plot(sample_time,log_data)
-#tmp_x = np.array(range(230, 330, 10))
-#tmp_y = 0*tmp_x + 1.9
-#plt.plot(tmp_x, tmp_y)
-#tmp_x = np.array(range(230, 330, 10))
-#tmp_y = 0*tmp_x + 1.8
-#plt.plot(tmp_x, tmp_y, linestyle="dashed")
-#plt.text(x=350, y=1.90-0.01, s="実測値")
-#plt.text(x=350, y=1.80-0.01, s="z="+str(a)+"t+"+str(b))
-#plt.axis(xmin=190, xmax=end_pos*10-sampling_ratio*10 + 10)
-#plt.show()
+#z-t200s.png
+tmp_pos = 2.20
+x = np.linspace(10*start_pos,end_pos*10-sampling_ratio*10,10)
+y = a*x + b 
+plt.plot(x,y,linestyle="dashed")
+plt.plot(sample_time,log_data)
+tmp_x = np.array(range(250, 350, 10))
+tmp_y = 0*tmp_x + tmp_pos
+plt.plot(tmp_x, tmp_y)
+tmp_x = np.array(range(250, 350, 10))
+tmp_y = 0*tmp_x + tmp_pos -0.1
+plt.plot(tmp_x, tmp_y, linestyle="dashed")
+plt.text(x=370, y=tmp_pos-0.01, s="実測値")
+plt.text(x=370, y=tmp_pos-0.1-0.01, s="z=-0.0006606t+3.1288")
+plt.axis(xmin=190, xmax=end_pos*10-sampling_ratio*10 + 10)
+plt.xlabel("t [s]")
+plt.ylabel("z (t)")
+plt.show()
 
 print("a:", a, ", b:",b)
 #print("end:", mat[-1, data_num], "start:",mat[0, data_num])
