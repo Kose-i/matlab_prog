@@ -5,6 +5,11 @@
 \usepackage{amsmath}
 \usepackage{subfigure}
 
+\usepackage{titlesec}
+%\titleformat*{\section}{\tiny\bfseries}
+\titleformat*{\section}{\large}
+\titleformat*{\subsection}{\normalsize\bf}
+
 \begin{document}
 
 \section{目的}
@@ -30,22 +35,6 @@
   G_p = \frac{K_p}{1+T_ps}e^{-L_ps}
 \end{equation}
 
-%\begin{figure}[htb]
-%  \begin{center}
-%    \includegraphics[clip,width=4.0cm]{../Img/FigB1.eps}
-%    \label{FigB1}
-%    \caption{実験装置の概観}
-%  \end{center}
-%\end{figure}
-%
-%\begin{figure}[htb]
-%  \begin{center}
-%    \includegraphics[clip,width=4.0cm]{../Img/FigB2.eps}
-%    \caption{実験装置の概要}
-%    \label{FigB2}
-%  \end{center}
-%\end{figure}
-
 \begin{figure}[htbp]
  \begin{minipage}{0.5\hsize}
   \begin{center}
@@ -62,27 +51,6 @@
   \label{FigB2}
  \end{minipage}
 \end{figure}
-%\begin{figure}
-%  \begin{center}
-%  \subfigure[実験装置の概観]{
-%    %\begin{pspicture}...\end{pspicture}
-%    %\input{graphics.tex}
-%    %\resizebox{0.49\textwidth}{!}{\input{hogehoge.tex}}
-%    \includegraphics[clip,width=4.0cm]{../Img/FigB1.eps}
-%    \label{FigB1}
-%  }
-%  %
-%  \hfill
-%  %
-%  \subfigure[右側に配置する図の見出し]{
-%    \includegraphics[clip,width=4.0cm]{../Img/FigB2.eps}
-%    \label{FigB2}
-%  }
-%  \end{center}
-%  \vspace{-0.5cm}
-%  \caption{全体の見出し}
-%  \label{図全体へのラベル}
-%\end{figure}
 
 \begin{figure}[tb]
   \begin{center}
@@ -98,14 +66,18 @@
   \theta(t) = AK_p(1-e^{-(t-L_p)/T_p})
 \end{equation}
 となる．ここで，$\Delta\theta(t)=\theta(t+h_1)-\theta(t)$($h_1$:データ処理用サンプリング周期)と定義すると，
-\begin{equation}
+\begin{eqnarray}
   \label{B3-4}
-  \Delta\theta(t) = AK_p(1-e^{-h_1/T_p})e^{-(t-L_p)/T_p}
-\end{equation}
-となる．さらに$z(t)=ln\Delta\theta(t)$とすると，
+  \Delta\theta(t) &=& \theta(t+h_1) - \theta(t) \nonumber \\
+                  &=& AK_p(1-e^{-(t+h_1 - L_p)/T_p}) - AK_p(1-e^{-(t-L_p)/T_p}) \nonumber \\
+                  &=& AK_p\{(1-e^{-(t - L_p)/T_p} e^{-h_1/T_p}) - (1-e^{-(t-L_p)/T_p})\} \nonumber \\
+                  &=& AK_p\{e^{-(t-L_p)/T_p} - e^{-(t - L_p)/T_p} e^{-h_1/T_p}\} \nonumber \\
+                  &=& AK_p(1-e^{-h_1/T_p})e^{-(t-L_p)/T_p}
+\end{eqnarray}
+となる．さらに$z(t)={\rm ln}\Delta\theta(t)$とすると，
 \begin{equation}
   \label{B3-5}
-  z(t) = -at+b， a = \frac{1}{T_p}， b = ln{AK_p(1-e^{-h_1/T_p})} + \frac{L_p}{T_p}
+  z(t) = -at+b， a = \frac{1}{T_p}， b = {\rm ln}\{AK_p(1-e^{-h_1/T_p})\} + \frac{L_p}{T_p}
 \end{equation}
 となる．すなわち，$z(t)$と$t$の関係(具体的には$a$の値)が分かれば，時定数$T_p$を求めることができる．しかし，$K_p$と$L_p$の値は$b$の値が分かっていても，この条件のみから計算することはできない．そこで$K_p$はシステムのゲイン，すなわち定常状態での入力信号と出力信号の比であるから，次のように考えることができる．
 \begin{equation}
@@ -117,7 +89,7 @@
   \item[(1)]入力電力を設定し，ステップ応答実験(同定実験)を行う．このとき，初期温度，最終温度を記録しておく．
   \item[(2)]データ処理用サンプリング周期$h_1$の値を定める．
   \item[(3)]実験で得られたデータをプロットする．実験で得られたデータにはノイズが含まれているので，プロットしたグラフをよく観察し，必要に応じて移動平均などの処理を行う．
-  \item[(4)]$\Delta\theta(t) = \theta(t+h_1)-\theta(t)$および$z(t)=ln\Delta\theta(t)$を計算し，$t-z(t)$のグラフを作成する．
+  \item[(4)]$\Delta\theta(t) = \theta(t+h_1)-\theta(t)$および$z(t)={\rm ln}\Delta\theta(t)$を計算し，$t-z(t)$のグラフを作成する．
   \item[(5)]最小二乗法を用いて式(\ref{B3-5})の$a，b$を求め，時定数$T_p$を計算する．$t-z(t)$のグラフは実験初期ではむだ時間部分の影響で，十分時間が経った後は対数の性質により，ばらつきが大きくなるので最小二乗法を用いる範囲には十分注意すること．また，得られた直線を$t-z(t)$のグラフに重ねて描き，計算の妥当性を確認しておく．
   \item[(6)]$K_p$を計算し，$L_p$を求める．
 \end{description}
@@ -232,10 +204,30 @@ y(t) + T_p\dot{y}(t) = AK_p
 \begin{eqnarray}
   \label{C19}
   T_W & = & \int_0^{T_W} dt = \int_0^R \frac{1}{\dot{y}(t)} dy = \int_0^R \frac{T_p}{-y+AK_p} dy\\
-  & = & -[T_p ln|-y+AK_p|]^R_0\\
-  & = & -T_p(ln|AK_p-R|-ln|AK_p|)
+  & = & -[T_p {\rm ln}|-y+AK_p|]^R_0\\
+  & = & -T_p({\rm ln}|AK_p-R|-{\rm ln}|AK_p|)
 \end{eqnarray}
 となり，切り替え時間$T_W$が計算できる．
+\subsection{最小二乗法}
+最小二乗法は，計測点が$X$のとき，$Y$と関数値$f(X)$との差$(Y-f(X))$を計算する．差の2乗$(Y-f(X))^2$が小さければ，$Y$と$f(X)$は近い値となる．差の2乗を全ての点で合計し，その合計値を最小にする．
+\begin{equation}
+  \label{minimum_required_method}
+  T = \sum_{}^{}(Y-f(X))^2
+\end{equation}
+式(\ref{minimum_required_method})の$T$(合計)が最小となる関数の係数を求める．係数が求まると，任意の$X$での$f(X)$が求まる\cite{minimum_method}．
+ここで，関数$y = a + bx_n$とすると，
+\begin{eqnarray}
+  \label{minimum_method}
+  aN + b\sum_{n}^{}x_n = \sum_{n}^{}y_n \\
+  a\sum_{n}^{}x_n + b\sum_{n}^{}x_n^2 = \sum_{n}^{}x_ny_n
+\end{eqnarray}
+となる．これを連立方程式としてとくと，
+\begin{eqnarray}
+a = \frac{\sum{}^{}y \sum{}^{}x^2 - \sum{}^{}xy\sum{}^{}x^2}{N\sum_{}^{}x^2 - (\sum_{}^{}x)^2}\\
+b = \frac{N\sum{}^{}xy - \sum{}^{}x\sum{}^{}y}{N\sum_{}^{}x^2 - (\sum_{}^{}x)^2}
+\end{eqnarray}
+と求められる．
+
 \section{実験方法}
 \subsection{実験準備}
 以下の手続きに従って実験の準備を行った．これらの手続きは同定実験と制御実験に共通である．
@@ -286,7 +278,7 @@ y(t) + T_p\dot{y}(t) = AK_p
 得られたグラフを図\ref{identification_EXP}に示す．
 \begin{figure}[tb]
   \begin{center}
-    \includegraphics[clip,width=7.0cm]{../graph/identification.png}
+    \includegraphics[clip,width=7.0cm]{../graph/identification.eps}
     \caption{同定実験により得られたグラフ}
     \label{identification_EXP}
   \end{center}
@@ -294,26 +286,7 @@ y(t) + T_p\dot{y}(t) = AK_p
 
 \subsection{計算実験の結果}
 %\comment{移動平均法}
-実験ではデータの平滑化のために移動平均法を使用した．データが激しく変動して，全体的な動きをつかまえにくい場合，細かな変動をならし，傾向線を求める考え方が移動平均の考えである．データを，傾向変動と偶然変動の和と見る．偶然変動を除いて，全体のトレンド傾向を見たい場合に使う．一般に，移動平均は，周期が移動平均の項数に等しい周期的変動を除去してデータを円滑化する\cite{moving_average}．
-
-最小二乗法は，計測点が$X$のとき，$Y$と関数値$f(X)$との差$(Y-f(X))$を計算する．差の2乗$(Y-f(X))^2$が小さければ，$Y$と$f(X)$は近い値となる．差の2乗を全ての点で合計し，その合計値を最小にする．
-\begin{equation}
-  \label{minimum_required_method}
-  T = \sum_{}^{}(Y-f(X))^2
-\end{equation}
-式(\ref{minimum_required_method})の$T$(合計)が最小となる関数の係数を求める．係数が求まると，任意の$X$での$f(X)$が求まる\cite{minimum_method}．
-ここで，関数$y = a + bx_n$とすると，
-\begin{eqnarray}
-  \label{minimum_method}
-  aN + b\sum_{n}^{}x_n = \sum_{n}^{}y_n \\
-  a\sum_{n}^{}x_n + b\sum_{n}^{}x_n^2 = \sum_{n}^{}x_ny_n
-\end{eqnarray}
-となる．これを連立方程式としてとくと，
-\begin{eqnarray}
-a = \frac{\sum{}^{}y \sum{}^{}x^2 - \sum{}^{}xy\sum{}^{}x^2}{N\sum_{}^{}x^2 - (\sum_{}^{}x)^2}\\
-b = \frac{N\sum{}^{}xy - \sum{}^{}x\sum{}^{}y}{N\sum_{}^{}x^2 - (\sum_{}^{}x)^2}
-\end{eqnarray}
-と求められる．
+実験ではデータの平滑化のために移動平均法を使用した．データが激しく変動して，全体的な動きをつかまえにくい場合，細かな変動をならし，傾向線を求める考え方が移動平均の考えである．データを，傾向変動と偶然変動の和と見る．偶然変動を除いて，全体のトレンド傾向を見たい場合に使う．一般に，移動平均は，周期が移動平均の項数に等しい周期的変動を除去してデータを平滑化する\cite{moving_average}．
 
 $h_1=200$[s]，$h_1=290$[s]，$h_1=300$[s]とし，$z-t$のグラフを図\ref{z-t_h1=200s}，図\ref{z-t_h1=290s}，図\ref{z-t_h1=300s}に示す．
 \begin{figure}[tb]
@@ -386,7 +359,7 @@ $h_1=200$[s]，$h_1=290$[s]，$h_1=300$[s]とし，$z-t$のグラフを図\ref{z
 $R=35$[℃]とする．このとき，切り替え時間$T_w$，定常入力$A_s$は次のようになる．
 \begin{eqnarray}
   \label{T_w}
-  T_w &=& -T_p (ln|A K_p - R| - ln| A K_p|) \\
+  T_w &=& -T_p ({\rm ln}|A K_p - R| - {\rm ln}| A K_p|) \\
       &=& 499.8
 \end{eqnarray}
 
@@ -445,7 +418,7 @@ $t > L_p$においては次の式を満たす．
 そのため，最短時間制御の構成において，むだ時間を考慮しなくてもよい．
 \item[(2)]実験結果を考察し，最短時間制御の長所と欠点についてまとめよ．\\
 キーワード:モデル化誤差，フィードフォワード制御，入力制限\\
-  実験結果は行き過ぎ量が存在した．最短時間制御の長所としては，操作量$Q(t)$の可動範囲が$Q_{min} \leq Q(t) \leq Q_{max}$であるとき，最短時間が保証される\cite{process_control}.しかし，短所として，フィードバックを入力の入れ替えにのみ使用するため，特性を表す数学モデルが完全に与えられていて，しかもその変動がまったくないと考えられる場合にのみ制御を行うことができる．ひじょうに複雑なプロセスや新しいプラントなどにおいては，対象プロセスの数学モデルは必ずしも十分には与えられていない．この不十分な知識に基づいて制御を行うのはあまり意味がないし，制御ともいえない\cite{optimal_controll_theory}．そのため，制御系の対象プロセスの外乱や未知の変動に対して，対処することができず，偏差が生じたと考えられる．
+  実験結果は行き過ぎ量が存在した．最短時間制御の長所としては，操作量$Q(t)$の可動範囲が$Q_{min} \leq Q(t) \leq Q_{max}$であるとき，最終値に収束するまでの最短時間が保証される\cite{process_control}.しかし，短所として，フィードバックを入力の入れ替えにのみ使用するため，特性を表す数学モデルが完全に与えられていて，しかもその変動がまったくないと考えられる場合にのみ制御を行うことができる．とくに複雑なプロセスや新しいプラントなどにおいては，対象プロセスの数学モデルは必ずしも十分には与えられていない\cite{optimal_controll_theory}．そのため，制御系の対象プロセスの外乱や未知の変動に対して，対処することができず，偏差が生じたと考えられる．
 \end{description}
 
 \section{まとめ}
