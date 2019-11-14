@@ -4,6 +4,7 @@
 \usepackage[dvipdfmx]{graphicx}
 \usepackage{amsmath}
 \usepackage{subfigure}
+\usepackage{float}
 
 \usepackage{titlesec}
 %\titleformat*{\section}{\tiny\bfseries}
@@ -11,15 +12,16 @@
 \titleformat*{\subsection}{\normalsize\bf}
 
 \begin{document}
+\setcounter{page}{1}
 
 \section{目的}
-　ここでは，熱交換器や強制貫流ボイラのような，熱伝導プロセスの一つである加熱プロセス系を制御対象として，最短時間制御により温度を制御する方法を学ぶ．一般に熱伝導系は，長大ばねの振動や建造物などにおける弾性振動と同様に，時間の他に空間を表す独立変数が必要な分布定数系として取り扱われる．しかし，本実験ではモデル化や制御系構成の簡単化のために対象を集中定数系として取り扱い，熱伝導系のある一点の温度に注目した最短時間制御系を構築する．
+ここでは，熱交換器や強制貫流ボイラのような，熱伝導プロセスの一つである加熱プロセス系を制御対象として，最短時間制御により温度を制御する方法を学ぶ．一般に熱伝導系は，長大ばねの振動や建造物などにおける弾性振動と同様に，時間の他に空間を表す独立変数が必要な分布定数系として取り扱われる．しかし，本実験ではモデル化や制御系構成の簡単化のために対象を集中定数系として取り扱い，熱伝導系のある一点の温度に注目した最短時間制御系を構築する．
 \section{実験装置の概要}
-　まず，実験装置は図\ref{FigB1}に示されるように上端がヒータによって加熱される構造であり，また，下端に放熱板が取り付けられている銅棒(加熱プロセス)，温度測定用の熱電対を用いた測定システム，計算機および変圧器から構成される(図\ref{FigB2})．ヒータに供給される電力は変圧器によって調整可能であり，計算機によって測定温度の記録を行う．\\
-　次に加熱プロセスの詳細を図\ref{FigB3}に示す．加熱プロセスは銅棒の表面から熱が拡散するのを抑えるため，保温用の綿が巻き付けられている．銅棒は上端から加熱され，放熱板につながる下端から冷却される．銅棒の各点の温度はシース型熱電対によって測定され，A/D変換器を経て計算機に記録される．
+まず，実験装置は図\ref{FigB1}に示されるように上端がヒータによって加熱される構造であり，また，下端に放熱板が取り付けられている銅棒(加熱プロセス)，温度測定用の熱電対を用いた測定システム，計算機および変圧器から構成される(図\ref{FigB2})．ヒータに供給される電力は変圧器によって調整可能であり，計算機によって測定温度の記録を行う．\\
+  次に加熱プロセスの詳細を図\ref{FigB3}に示す．加熱プロセスは銅棒の表面から熱が拡散するのを抑えるため，保温用の綿が巻き付けられている．銅棒は上端から加熱され，放熱板につながる下端から冷却される．銅棒の各点の温度はシース型熱電対によって測定され，A/D変換器を経て計算機に記録される．
 \section{原理}
 \subsection{制御対象の伝達関数}
-　x[m]をヒータからの距離，t[s]を時間，$\theta(x，t)$[K]をその時の温度とする．初期条件$\theta_x(x，0)=0$(温度勾配が0)でステップ状の入力$Q_0(t)=Q_0$[J]が印加された場合，この系は次式で表現できることが知られている．
+x[m]をヒータからの距離，t[s]を時間，$\theta(x，t)$[K]をその時の温度とする．初期条件$\theta_x(x，0)=0$(温度勾配が0)でステップ状の入力$Q_0(t)=Q_0$[J]が印加された場合，この系は次式で表現できることが知られている．
 \begin{equation}
   \label{B3-1}
   \theta(x，t) = \sum_{n=1}^{\infty}\frac{2}{\pi+2b_n}\frac{Q_0^{\prime}\sin(a_nx)}{xa_n^3}\cos{a_nx(1-e^{-a_n^2t})}
@@ -60,7 +62,7 @@
   \end{center}
 \end{figure}
 \subsection{未知パラメータの同定}
-　本実験ではステップ応答法により未知パラメータの同定を行う．式(\ref{B3-2})にステップ入力$Q_0(s) = A/s$を加えると，出力は
+本実験ではステップ応答法により未知パラメータの同定を行う．式(\ref{B3-2})にステップ入力$Q_0(s) = A/s$を加えると，出力は
 \begin{equation}
   \label{B3-3}
   \theta(t) = AK_p(1-e^{-(t-L_p)/T_p})
@@ -100,7 +102,7 @@
 \item[(3)]最短時間制御を行うために，切り替え後の入力電力$A_s$，切り替え時間$T_\omega$を計算する．
 \end{description}
 \subsection{最短時間制御}
-　特定の性能に対しては，非線形動作のほうが線形のものより優秀であることが知られている．ボントリアギンの最大原理によれば，たとえば時間を最短にする制御動作はban-ban型の制御方式をとる．このような制御系を設計する場合には，位相面解析法は直感的にも理解しやすく，図式的に解くのも利用される．\\
+特定の性能に対しては，非線形動作のほうが線形のものより優秀であることが知られている．ボントリアギンの最大原理によれば，たとえば時間を最短にする制御動作はban-ban型の制御方式をとる．このような制御系を設計する場合には，位相面解析法は直感的にも理解しやすく，図式的に解くのも利用される．\\
 　ここでは，実験に沿って，一次遅れ系の最短時間制御について説明する．\\
 \begin{table}[tb]
   \begin{center}
@@ -288,51 +290,8 @@ b = \frac{N\sum{}^{}xy - \sum{}^{}x\sum{}^{}y}{N\sum_{}^{}x^2 - (\sum_{}^{}x)^2}
 %\comment{移動平均法}
 実験ではデータの平滑化のために移動平均法を使用した．データが激しく変動して，全体的な動きをつかまえにくい場合，細かな変動をならし，傾向線を求める考え方が移動平均の考えである．データを，傾向変動と偶然変動の和と見る．偶然変動を除いて，全体のトレンド傾向を見たい場合に使う．一般に，移動平均は，周期が移動平均の項数に等しい周期的変動を除去してデータを平滑化する\cite{moving_average}．
 
-$h_1=200$[s]，$h_1=290$[s]，$h_1=300$[s]とし，$z-t$のグラフを図\ref{z-t_h1=200s}，図\ref{z-t_h1=290s}，図\ref{z-t_h1=300s}に示す．
-\begin{figure}[tb]
-  \begin{center}
-    \includegraphics[clip,width=7.0cm]{../graph/z-t200s.png}
-    \caption{サンプリング周期200[s]とした時のz-tのグラフ}
-    \label{z-t_h1=200s}
-  \end{center}
-\end{figure}
-\begin{figure}[tb]
-  \begin{center}
-    \includegraphics[clip,width=7.0cm]{../graph/z-t290s.png}
-    \caption{サンプリング周期290[s]とした時のz-tのグラフ}
-    \label{z-t_h1=290s}
-  \end{center}
-\end{figure}
-\begin{figure}[tb]
-  \begin{center}
-    \includegraphics[clip,width=7.0cm]{../graph/z-t300s.png}
-    \caption{サンプリング周期300[s]とした時のz-tのグラフ}
-    \label{z-t_h1=300s}
-  \end{center}
-\end{figure}
-それらの$a$，$b$の値を使ってパラメータを計算し，ステップ応答の結果を図\ref{step_response200s}，図\ref{step_response290s}，図\ref{step_response300s}に示す．
-\begin{figure}[tb]
-  \begin{center}
-    \includegraphics[clip,width=7.0cm]{../graph/step_response200s.png}
-    \caption{サンプリング周期200[s]とした時のステップ応答のグラフ}
-    \label{step_response200s}
-  \end{center}
-\end{figure}
-\begin{figure}[tb]
-  \begin{center}
-    \includegraphics[clip,width=7.0cm]{../graph/step_response290s.png}
-    \caption{サンプリング周期290[s]とした時のステップ応答のグラフ}
-    \label{step_response290s}
-  \end{center}
-\end{figure}
-\begin{figure}[tb]
-  \begin{center}
-    \includegraphics[clip,width=7.0cm]{../graph/step_response300s.png}
-    \caption{サンプリング周期300[s]とした時のステップ応答のグラフ}
-    \label{step_response300s}
-  \end{center}
-\end{figure}
-求めたパラメータを表\ref{Experiment_ab}にまとめる．
+%求めたパラメータを表\ref{Experiment_ab}にまとめる． %!TODO: 5.2となる件
+求めたパラメータを表2にまとめる．
 \begin{eqnarray}
   \label{K_p}
   K_p &=& \frac{100 \theta(\infty)- 100 \theta(0)}{A} \\
@@ -342,13 +301,105 @@ $h_1=200$[s]，$h_1=290$[s]，$h_1=300$[s]とし，$z-t$のグラフを図\ref{z
   \label{Experiment_ab}
   \caption{計算結果}
   \begin{tabular}{|c|c|c|c|c|c|c|} \hline
-    $h_1$ & 適用範囲[s] & $a$ & $b$ & $T_p$ & $L_p$ & $E$[\%] \\ \hline \hline
-    200 & 200-2000 & 0.0006642 & 2.7596 & 1505.5348 &  28.9427 & 0.54 \\ \hline
-    290 & 200-2000 & 0.0006602 & 3.0986 & 1514.6752 &  32.5544 & 0.42 \\ \hline
-    300 & 200-2000 & 0.0006606 & 3.1288 & 1513.7651 &  32.1814 & 0.43 \\ \hline
+    $h_1$ & 適用範囲[s] & $a$ & $b$ & $T_p$ & $L_p$ & 相対誤差[\%] \\ \hline \hline
+    100 & 200-2000 & 0.0006743 & 2.1080 & 1483.0303 & 20.1054 & 0.99 \\ \hline
+    150 & 200-2000 & 0.0006676 & 2.4911 & 1497.7916 & 25.8541 & 0.68 \\ \hline
+    200 & 200-2000 & 0.0006642 & 2.7596 & 1505.5348 & 28.9427 & 0.54 \\ \hline
+    250 & 200-2000 & 0.0006614 & 2.9639 & 1511.9341 & 30.8862 & 0.45 \\ \hline
+    290 & 200-2000 & 0.0006602 & 3.0986 & 1514.6752 & 32.5544 & 0.42 \\ \hline
+    300 & 200-2000 & 0.0006606 & 3.1288 & 1513.7651 & 32.1814 & 0.43 \\ \hline
+    340 & 200-2000 & 0.0006610 & 3.2429 & 1512.9113 & 32.2556 & 0.43 \\ \hline
+    390 & 200-2000 & 0.0006621 & 3.3652 & 1510.2662 & 31.4374 & 0.45 \\ \hline
   \end{tabular}
 \end{table}
-実験結果の表\ref{Experiment_ab}から，最小の相対誤差を取ったサンプリング周期$h_1=290$[s]を使った結果を採用する．
+$h_1=200$[s]，$h_1=250$[s]，$h_1=290$[s]，$h_1=300$[s]，$h_1=340$[s]，$h_1=390$[s]とし，$z-t$のグラフを図\ref{z-t_h1=200s}，図\ref{z-t_h1=250s}，図\ref{z-t_h1=290s}，図\ref{z-t_h1=300s}，図\ref{z-t_h1=340s}，図\ref{z-t_h1=390s}，に示す．\\
+それらの$a$，$b$の値を使ってパラメータを計算し，ステップ応答の結果を図\ref{step_response200s}，図\ref{step_response250s}，図\ref{step_response290s}，図\ref{step_response300s}，図\ref{step_response340s}，図\ref{step_response390s}に示す．\\
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=7.0cm]{../graph/z-t200s.eps}
+    \caption{サンプリング周期200[s]とした時のz-tのグラフ}
+    \label{z-t_h1=200s}
+  \end{center}
+\end{figure}
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=7.0cm]{../graph/step_response200s.eps}
+    \caption{サンプリング周期200[s]とした時のステップ応答のグラフ}
+    \label{step_response200s}
+  \end{center}
+\end{figure}
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=7.0cm]{../graph/z-t250s.eps}
+    \caption{サンプリング周期250[s]とした時のz-tのグラフ}
+    \label{z-t_h1=250s}
+  \end{center}
+\end{figure}
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=7.0cm]{../graph/step_response250s.eps}
+    \caption{サンプリング周期250[s]とした時のステップ応答のグラフ}
+    \label{step_response250s}
+  \end{center}
+\end{figure}
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=7.0cm]{../graph/z-t290s.eps}
+    \caption{サンプリング周期290[s]とした時のz-tのグラフ}
+    \label{z-t_h1=290s}
+  \end{center}
+\end{figure}
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=7.0cm]{../graph/step_response290s.eps}
+    \caption{サンプリング周期290[s]とした時のステップ応答のグラフ}
+    \label{step_response290s}
+  \end{center}
+\end{figure}
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=7.0cm]{../graph/z-t300s.eps}
+    \caption{サンプリング周期300[s]とした時のz-tのグラフ}
+    \label{z-t_h1=300s}
+  \end{center}
+\end{figure}
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=7.0cm]{../graph/step_response300s.eps}
+    \caption{サンプリング周期300[s]とした時のステップ応答のグラフ}
+    \label{step_response300s}
+  \end{center}
+\end{figure}
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=7.0cm]{../graph/z-t340s.eps}
+    \caption{サンプリング周期340[s]とした時のz-tのグラフ}
+    \label{z-t_h1=340s}
+  \end{center}
+\end{figure}
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=7.0cm]{../graph/step_response340s.eps}
+    \caption{サンプリング周期340[s]とした時のステップ応答のグラフ}
+    \label{step_response340s}
+  \end{center}
+\end{figure}
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=7.0cm]{../graph/z-t390s.eps}
+    \caption{サンプリング周期390[s]とした時のz-tのグラフ}
+    \label{z-t_h1=390s}
+  \end{center}
+\end{figure}
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=7.0cm]{../graph/step_response390s.eps}
+    \caption{サンプリング周期390[s]とした時のステップ応答のグラフ}
+    \label{step_response390s}
+  \end{center}
+\end{figure}
+%実験結果の表\ref{Experiment_ab}から，最小の相対誤差を取ったサンプリング周期$h_1=290$[s]を使った結果を採用する．\\
+実験結果の表2から，最小の相対誤差を取ったサンプリング周期$h_1=290$[s]を使った結果を採用する．\\
 モデルの伝達関数は次のようになる．
 \begin{equation}
   \label{transform_result}
