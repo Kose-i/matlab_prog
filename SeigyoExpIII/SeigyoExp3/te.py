@@ -84,7 +84,7 @@ def main():
 if __name__=='__main__':
     mini_c = 0
     mini_tmp = 1000
-    sampling_ratio = 30
+    sampling_ratio = 10
     while sampling_ratio<51:
         tmp = main()
         if tmp < mini_tmp:

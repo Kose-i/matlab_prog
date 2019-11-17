@@ -3,6 +3,13 @@
 \setcounter{secnumdepth}{3}
 \usepackage[dvipdfmx]{graphicx}
 \usepackage{amsmath}
+\usepackage{float}
+
+\pagestyle{myheadings}
+
+\usepackage{titlesec}
+\titleformat*{\section}{\large}
+\titleformat*{\subsection}{\normalsize\bf}
 
 \begin{document}
 
@@ -10,31 +17,204 @@
 \section{目的}
 　プロセス制御系の制御対象（プロセスまたはプラントともいう）は，一般に，炉，反応装置などの化学プロセスが主である．それらは分布定数系，もしくはむだ時間を含む系であることが多く，その応答時間は数分から数10分にもなり，サーボ系に比べ，極めてゆっくりとしているのが特徴である．ここでは，プロセス系の一つであるレベル制御を最も一般的なPID調節器の設計を通じて学習する．
 \section{原理}
-\section{実験装置と注意事項}
-\subsection{実験装置}
-\subsection{プログラム}
-\subsection{実験の開始時と終了時の操作}
-\section{開ループ実験}
-{\LARGE 実験(1) 制御弁}
-流量の制御装置として使用している制御弁の動特性を調べた．
-\begin{figure}[tb]
+まず，図\ref{FigB1-1}に本実験で用いるレベル系のモデルを示す．ただし，図の記号は
+\begin{flushleft}
+  \setlength{\leftskip}{3.0cm}
+     $u$:タンク1への流入量\\
+     $q_i$:タンク$i$からの流出量($i$=1,2)\\
+     $h_i$:タンク$i$の水位($i$=1,2)\\
+     $A_i$:タンク$i$の断面積($i$=1,2)\\
+     $R_i$:流体抵抗($i$=1,2)
+\end{flushleft}
+を意味する．
+本実験では，タンク1への流入量$u$を入力とし，タンク2の水位$h_2$を出力とする制御対象の同定を行う．制御対象の伝達関数は
+\begin{equation}
+  \label{eqB1-1}
+  \frac{H_2(s)}{U(s)} = \frac{R_2(s)}{(1+A_1R_1s)(1+A_2R_2s)}
+\end{equation}
+となり，対象とする系は二次遅れ系である．ただし，式(\ref{eqB1-1})の$U(s)$，$H_2(s)$は，それぞれ$u$および$h_2$のラプラス変換である．
+
+\begin{figure}[H]
   \begin{center}
-    \includegraphics[clip,width=7.0cm]{../graph/V_Q_transform.png}
-    \caption{}
-    \label{V_Q_transform}
+    \includegraphics[clip,width=7.0cm]{../img/FigB1_1.png}
+    \caption{レベル系}
+    \label{FigB1-1}
   \end{center}
 \end{figure}
+
+\subsection{PID制御について}
+PID制御の基本形を図\ref{PID-normal-form}に示す．スカラ制御系について説明する．すなわち，制御量，操作量，外乱の数をそれぞれ一とする．そうすると目標値から制御量を引いた値が偏差とみなせ，この偏差に基づいて操作量をいかに決定するかが問題となる．そこで，そのルール(制御則)を以下の三つについて考える．
+\begin{description}
+  \item[(1)] 偏差が小さければ操作量も小さくし，偏差が大きければそれに応じて大きくするのが妥当である．そこで，制御則に偏差に比例した項を含める．これを比例動作と呼び，P動作と略称する．
+  \item[(2)] 自己平衡性をもつ制御対象に比例制御のみを行うと，目標値や外乱のステップ状の変化に対して最終的に一定の偏差が残ってしまう．これを定常偏差またはオフセットという．そこで，制御則に偏差の積分に比例した項を含めればこの定常偏差が除去できる．これを積分動作またはI動作と呼ぶ．
+  \item[(3)] 偏差の増減の動向を操作量に反映すれば，より速く目標値に達することが期待できる．そこで，偏差の微分に比例する項も制御則に含める．これを微分動作またはD動作と呼ぶ．これは一種の予見動作である．
+\end{description}
+以上の動作を含む制御則がPID制御である．これを式で表すと次式のようになる．
+\begin{equation}
+  \label{}
+  u(t) = K_p e(t) + K_I\int^t_0 e(\tau) d\tau + K_D \frac{de(t)}{dt}
+\end{equation}
+ここで，$u(t)$は操作量，$e(t)$は偏差，$K_P$，$K_I$，$K_D$は比例定数である．更にこれを変形して，
+\begin{equation}
+  \label{}
+  u(t) = K_P\{ e(t) + \frac{1}{T_I}\int^t_0 e(\tau) d\tau + T_D\frac{de(t)}{dt}\}
+\end{equation}
+と表すのが慣例となっている．ここで，$K_P$を比例ゲイン，$T_I$を積分時間，$T_D$を微分時間と呼ぶ．PID制御系の設計は，これらの三つのパラメータの値を決めることであり，これをPID制御の調整(チューニング)という．この調整法は種々提案されており，そのなかで有名はZiegler\&Nicholsの限界感度法である．
+\begin{figure}[tb]
+  \begin{center}
+    \includegraphics[clip,width=7.0cm]{../img/2-A1.png}
+    \caption{PID制御系の基本形}
+    \label{PID-normal-form}
+  \end{center}
+\end{figure}
+\subsection{モデルの近似法}
+プロセス制御系では，制御対象の特性は一般に非常に複雑で，物理的な考察から，伝達関数を正確に求めることができない場合が多い．しかし，そのステップ応答はS字型特性をもつことが多いので，むだ時間$L$を用いて近似し，伝達関数を
+\begin{equation}
+  \label{}
+  G(s) = \frac{Ke^{-sL}}{Ts+1}
+\end{equation}
+と見なすことが多い．このように，一次遅れ＋むだ時間系に近似すれば，わずか三つのパラメータで表せることになり，その取り扱いが簡単になる．\\
+　一次遅れ＋むだ時間系のステップ応答は，一次遅れ系のステップ応答をむだ時間$L$だけ時間軸上で遅らせた形で$t>L$に対して次のようになる．
+\begin{equation}
+  \label{}
+  x(t) = \mathcal{L}^{-1}\{\frac{Ke^{-sL}}{Ts+1}\frac{r}{s}\} = rK(1 - e^{-\frac{t-L}{T}})
+\end{equation}
+複雑な系を一次遅れ系とむだ時間系の合成で近似しようとするとき，よく用いられる方法は，図\ref{LT_fromStepResponse}に示すように制御対象のステップ応答の変曲点Qで接線を引き，これを時間軸ならびに最終値との交点から$L$および$T$を決める方法である．
+\begin{figure}[tb]
+  \begin{center}
+    \includegraphics{../img/2-A2.png}
+    \caption{ステップ応答から$L$と$T$を求める方法}
+    \label{LT_fromStepResponse}
+  \end{center}
+\end{figure}
+
+\subsection{限界感度法}
+限界感度法は，制御対象の特性が一次遅れ＋むだ時間系に近似できるとして，閉ループ系の過渡応答の行き過ぎ量が25\%程度となるように，PID調整器のパラメータを選ぼうとするものである．\\
+　まず，図\ref{processController}の調整器をP動作のみとし，$K_P$を変化させて，閉ループ系が安定限界となる$K_P$の値を$K_C$とこのときの持続振動の周期$T_C$を求める．限界感度法は$K_C$と$T_C$をもとにして，パラメータ$K_P$，$T_I$，$T_D$を表のように求めるものである．\\
+　この実験書では，調節器をPI動作として使用するので表\ref{Ziegler-Nichols}の→の箇所を使用すればよい．また，$K_C$と$T_C$は制御対象のボード線図(図\ref{Bode-Diagram})からも求めることができる．つまりそのゲイン余裕$g_m$[dB]と位相交点周波数(開ループ周波数特性の位相が-180[deg]となる周波数)$\omega_C$[rad/sec]より
+%\begin{eqnarray}
+%  \begin{cases}
+%    20(\r log)_{10}K_C = g_m  [dB] & \\
+%    T_C = \frac{2\pi}{\omega_C} [sec] &
+%  \end{cases}
+%\end{eqnarray}
+とすればよい．
+\begin{table}[tb]
+  \label{Ziegler-Nichols}
+  \caption{Ziegler-Nicholsの限界感度法}
+  \begin{tabular}{|c|c|c|c|} \hline
+    $$ & $K_P$ & $T_P$ & $T_D$ \\ \hline \hline
+    P動作   & $0.5K_C$  & $\infty$    & 0 \\ \hline
+    →PI動作 & $0.45K_C$ & $0.83T_C$ & 0 \\ \hline
+    PID動作 & $0.6K_C$  & $0.5T_C$  & $0.125T_C$ \\ \hline
+  \end{tabular}
+\end{table}
+\begin{figure}[tb]
+  \begin{center}
+    \label{processController}
+    \includegraphics{../img/2-A3.png}
+    \caption{プロセス制御系}
+  \end{center}
+\end{figure}
+%\begin{figure}[tb]
+%  \begin{center}
+%    \label{Bode-Diagram}
+%    \includegraphics{../img/2-A4.png}
+%    \caption{ボード線図}
+%  \end{center}
+%\end{figure}
+
+\section{実験装置と注意事項}
+\subsection{実験装置}
+
+まず，図\ref{FigB1-2}および表\ref{TableB1-2}にレベル実験装置の構成および装置の仕様をそれぞれ示す．計算機からD/A変換器を解して入力される電流値によって制御バルブMV1の開度が変化し，このバルブ開度に対応した流量の水がタンク1に入り手動バルブを介してタンク2に流入する．また，タンク2から制御バルブMV3を介して水が排出される．これら入出流量に依存するタンクの水位は差圧変換器によって計測され，D/A変換器を介して計算機に伝送される．特に，制御弁への制御電流と弁の開閉度との関係は4[mA]で全閉，20[mA]で全開となることに注意せよ．また，レベル実験装置には絶対に触らないこと(特にバルブなどに触れるとパラメータが変わる)．
+\begin{table}[tb]
+  \label{TableB1-1}
+  \caption{expappにおける表示の意味}
+  %TODO
+  \begin{tabular}{c|c|c} \hline
+    表記 & 意味 & 備考\\ \hline \hline
+    MV1 & タンク１注水用電磁バルブ指令電流値 & 4[mA]から20[mA] \\ \hline
+    MV2 & タンク２注水用電磁バルブ指令電流値 & 4[mA]から20[mA] \\ \hline
+    MV3 & 第二タンク排水用電磁バルブ指令電流値 & 4[mA]から20[mA] \\ \hline
+    SAMPLING & サンプリング時間 & 1[s]から3[s]まで三段階で設定可能 \\ \hline
+    APPLY & 設定値の変更を適用 & \\ \hline
+    SV*[mA] & 電磁バルブ指令電流の設定値 & 実験前に表示 \\ \hline
+    PV*[mA] & 電磁バルブ指令電流の現在地 & 実験中に表示 \\ \hline
+    *[L/min] & 流量値 & \\ \hline
+    *[V] & 差圧変換器出力 & \\ \hline
+    IN & 入水経路 & \\ \hline
+    OUT & 排水経路 & \\ \hline
+  \end{tabular}
+\end{table}
+\begin{table}[tb]
+  \label{TableB1-2}
+  \caption{装置の仕様}
+  \begin{tabular}{c|c|c} \hline
+    装置 & 数 & 仕様\\ \hline \hline
+    タンク1 & 1 & 高さ 1000[mm]，内径 200[mm] \\ \hline
+    タンク2 & 1 & 高さ 1500[mm]，内径 320[mm] \\ \hline
+    電流比例制御弁 & 3 & 弁開度入力信号:4~20[mA]，全開-全閉時間:17[sec]以下，電源:24[VDC]±10\% \\ \hline
+    流量計 & 3 & オープンコレクタ出力，0.1[L/pulse] \\ \hline
+    差圧変換器 & 2 & 容量:200[gf/c$m^2$] \\ \hline
+    A/D変換ボード & 1 & 入力:8CH，0~10[V]，分解能:12[bit]，変換速度:10[sec/CH] \\ \hline
+    D/A変換ボード & 1 & 出力:4CH，24[bit] up/down counter，変換速度:10[sec/CH] \\ \hline
+    パスカルカウンタボード & 1 & 4CH，24[bit] up/down counter，外部入力:非絶縁TTL入力 \\ \hline
+    コンピュータ & 1 & NEC PC9801RX \\ \hline
+  \end{tabular}
+\end{table}
+\begin{figure}[tb]
+  \begin{center}
+    \includegraphics[clip,width=7.0cm]{../img/FigB1_2.png}
+    \caption{実験装置の構成}
+    \label{FigB1-2}
+  \end{center}
+\end{figure}
+\subsection{プログラム}
+本実験で使用するプログラムは，USR3のホームディレクトリにあるexp3に下記の三種類のプログラムが格納されている．
+
+\begin{description}
+  \item[expapp:]制御弁特性の検証実験，差圧変換器特性の検証実験，流量の調整，タンク2水抜きのためのプログラム
+  \item[step:]開ループ実験用プログラム
+  \item[PID:]閉ループ実験用プログラム
+\end{description}
+
+これらのプログラムを実行するために，\\
+cd exp3\\
+としてディレクトリexp3に移動する．
+\subsection{実験の開始時と終了時の操作}
+実験の開始時の操作は必ず次の順序で行うこと．
+
+\begin{description}
+  \item[(1)] 配電盤のスイッチを入れる．
+  \item[(2)] コンピュータの電源を入れる．
+  \item[(3)] 元バルブを開く．
+  \item[(4)] ./expappを実行し，制御弁を全開(20[mA])にして，流量が30[L/min]になるようにバルブ$V_1$を調整する．
+\end{description}
+
+また終了時には，これらを逆の順序で実行する．
+
+\section{開ループ実験}
+\subsection{実験(1) 制御弁}
+流量の制御装置として使用している制御弁の動特性を調べた．
+\begin{center}
+  \includegraphics[clip,width=7.0cm]{../img/A_Q_transform.png}
+\end{center}
 プログラム「./expapp」を起動した．制御電流を4[mA]から20[mA]まで変化させ，そのときの定常状態の流量を測定し，電流-流量特性を求めた．
-{\LARGE 実験(2) 差圧変換器(下段タンク用)}
+\subsection{実験(2) 差圧変換器(下段タンク用)}
 水位検出器として使用している差圧変換器の動特性を調べた．
-\fig{H_V_transform}
+\begin{center}
+  \includegraphics[clip,width=7.0cm]{../img/H_V_transform.png}
+\end{center}
 プログラム「./expapp」を起動した．制御弁を開閉して，タンク2の水位を増加させながら，そのときの差圧変換器の出力電圧を調べた．タンク2水位-出力電圧特性を求めた．ただし，測定する水位の上限は60[cm]とする．
-{\LARGE 実験(3) 開ループ応答}
+\subsection{実験(3) 開ループ応答}
 制御対象であるタンク1およびタンク2にステップ入力を加え，その過渡応答を求めた．
-\fig{Q_H_V_transform}
+\begin{center}
+  \includegraphics[clip,width=7.0cm]{../img/OpenResponse.png}
+\end{center}
 プログラム「./step」を起動した．プログラムの指示に従い，(1)制御弁の初期値，(2)変化量，(3)サンプリング周期を入力した．その後，[APPLY AND START]をクリックして実験を開始した．
-まず，制御弁が初期位置まで開き，タンク1に水が流れ込む．タンク2の水位が定常地に収束した後に，[Recording Start]をクリックするとタンク2の差圧変換器の出力の計測が始まる．[Recording Start]をクリックしてから10サンプル時刻後に「変化量」で与えた値だけ更に制御弁が開き，タンク2の差圧変換器出力の計測が始まる．出力値が定常状態に収束したら「STOP」をクリックした．この時，ファイルネーム(英数字)に拡張子(dat)を付けて「SAVE ONLY」をクリックしてデータを保存した．この時のデータの書式は\ref{OpenLoopResponseDataFormat}に示す通りである．データの横軸を時間軸に変換するには，「サンプル番号×サンプリング周期」とすればよい．
-\section{モデル同定(第2週)}
+まず，制御弁が初期位置まで開き，タンク1に水が流れ込む．タンク2の水位が定常地に収束した後に，[Recording Start]をクリックするとタンク2の差圧変換器の出力の計測が始まる．[Recording Start]をクリックしてから10サンプル時刻後に「変化量」で与えた値だけ更に制御弁が開き，タンク2の差圧変換器出力の計測が始まる．出力値が定常状態に収束したら「STOP」をクリックした．この時，ファイルネーム(英数字)に拡張子(dat)を付けて「SAVE ONLY」をクリックしてデータを保存した．データの横軸を時間軸に変換するには，「サンプル番号×サンプリング周期」とすればよい．
+\subsection{モデル同定(第2週)}
 各制御要素を次の手順で近似せよ．
 \begin{itemize}
 \item 実験(1)で電流-流量特性を作図するとともに，作動点近傍で線形化し制御弁のゲインを求め，ブロック線図を描け．
@@ -42,10 +222,16 @@
 \item 実験(3)で得られた結果を作図し，タンク1およびタンク2の伝達関数を一次遅れ＋むだ時間で近似し，ブロック線図を描け．
 \item 実験(1)-(3)で決定した各要素の合成結果と実験結果とを比較検討せよ．
 \end{itemize}
-\section{PID調節器の調整}
+\subsection{PID調節器の調整}
 開ループの結果より，Ziegler-Nicholsの限界感度法に基づきPID調節器のパラメータを決定した．なお，限界感度法においてはBode線図を作図して決定すること．本実験では，PI動作のみで制御を行った．つまり，PID調節器のパラメータ$T_D$とし他の$K_P$と$T_I$を調整する．
-\fig{FeedBackControlProcess}
-\section{閉ループ実験(第3週)}
+\begin{figure}[tb]
+  \begin{center}
+    \includegraphics[clip,width=7.0cm]{../img/PIDController.png}
+    \caption{フィードバック制御系}
+    \label{FeedbackController}
+  \end{center}
+\end{figure}
+\subsection{閉ループ実験(第3週)}
 プログラム「./PID」を起動した．
 プログラムの指示に従い，以下のパラメータを入力した．\\
 (1)比例ゲイン，(2)積分時間，(3)微分時間，(4)タンク2の目標水位，(5)差圧変換器のゲイン$D_{gain}$及びオフセット$D_{offset}$，(6)サンプリング周期\\
@@ -54,7 +240,7 @@
   D_{out} = H・D_{gain} + D_{offset}
 \end{equation}
 として計算している．目標水位は40[cm]とした．\\
-[APPLY AND START]をクリックして実験を開始した．[Apply disturbance]をクリックすると，外乱要素として排水用制御弁の開度が変化するので，その応答を観測し検討した．600サンプル後もしくは[STOP]ボタンをクリックした後，[SAVE OK]をクリックしてデータを保存し，ファイルネーム(英数字)に拡張子(.dat)を付けて保存した．このときのデータは図\ref{ClosedLoopDataFormat}に示す書式で印刷された．
+%[APPLY AND START]をクリックして実験を開始した．[Apply disturbance]をクリックすると，外乱要素として排水用制御弁の開度が変化するので，その応答を観測し検討した．600サンプル後もしくは[STOP]ボタンをクリックした後，[SAVE OK]をクリックしてデータを保存し，ファイルネーム(英数字)に拡張子(.dat)を付けて保存した．
 
 \section{課題}
 \begin{description}
@@ -67,6 +253,8 @@
 PID制御に使用するPID調節器の設計を習得した．
 
 \begin{thebibliography}{9}
+  \bibitem{bibitemPIDControll} 須田信英，PID制御,1998．
+  \bibitem{bibitemPendulum} 川田昌克ら，倒立振子で学ぶ制御工学，2017．
 \end{thebibliography}
 
 \end{document}
