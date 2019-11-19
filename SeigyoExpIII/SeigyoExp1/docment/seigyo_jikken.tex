@@ -1,6 +1,7 @@
 \documentclass[12pt]{jsarticle}
 
 \setcounter{secnumdepth}{3}
+%\setcounter{figure}{1}
 \usepackage[dvipdfmx]{graphicx}
 \usepackage{amsmath}
 \usepackage{float}
@@ -82,7 +83,7 @@ PID制御の基本形を図\ref{PID-normal-form}に示す．スカラ制御系�
 複雑な系を一次遅れ系とむだ時間系の合成で近似しようとするとき，よく用いられる方法は，図\ref{LT_fromStepResponse}に示すように制御対象のステップ応答の変曲点Qで接線を引き，これを時間軸ならびに最終値との交点から$L$および$T$を決める方法である．
 \begin{figure}[tb]
   \begin{center}
-    \includegraphics{../img/2-A2.png}
+    \includegraphics[clip,width=7.0cm]{../img/2-A2.png}
     \caption{ステップ応答から$L$と$T$を求める方法}
     \label{LT_fromStepResponse}
   \end{center}
@@ -100,29 +101,51 @@ PID制御の基本形を図\ref{PID-normal-form}に示す．スカラ制御系�
 %\end{eqnarray}
 とすればよい．
 \begin{table}[tb]
-  \label{Ziegler-Nichols}
-  \caption{Ziegler-Nicholsの限界感度法}
-  \begin{tabular}{|c|c|c|c|} \hline
-    $$ & $K_P$ & $T_P$ & $T_D$ \\ \hline \hline
-    P動作   & $0.5K_C$  & $\infty$    & 0 \\ \hline
-    →PI動作 & $0.45K_C$ & $0.83T_C$ & 0 \\ \hline
-    PID動作 & $0.6K_C$  & $0.5T_C$  & $0.125T_C$ \\ \hline
-  \end{tabular}
+  \begin{center}
+    \label{Ziegler-Nichols}
+    \caption{Ziegler-Nicholsの限界感度法}
+    \begin{tabular}{|c|c|c|c|} \hline
+      $$ & $K_P$ & $T_P$ & $T_D$ \\ \hline \hline
+      P動作   & $0.5K_C$  & $\infty$    & 0 \\ \hline
+      →PI動作 & $0.45K_C$ & $0.83T_C$ & 0 \\ \hline
+      PID動作 & $0.6K_C$  & $0.5T_C$  & $0.125T_C$ \\ \hline
+    \end{tabular}
+  \end{center}
 \end{table}
 \begin{figure}[tb]
   \begin{center}
     \label{processController}
-    \includegraphics{../img/2-A3.png}
+    \includegraphics[clip,width=7.0cm]{../img/2-A3.png}
     \caption{プロセス制御系}
   \end{center}
 \end{figure}
-%\begin{figure}[tb]
-%  \begin{center}
-%    \label{Bode-Diagram}
-%    \includegraphics{../img/2-A4.png}
-%    \caption{ボード線図}
-%  \end{center}
-%\end{figure}
+\begin{figure}[tb]
+  \begin{center}
+    \label{Bode-Diagram}
+    \includegraphics[clip, width=7.0cm, height=5.0cm]{../img/Fig2-A4new.png}
+    \caption{ボード線図}
+  \end{center}
+\end{figure}
+
+\subsection{最小二乗法}
+最小二乗法は，計測点が$X$のとき，$Y$と関数値$f(X)$との差$(Y-f(X))$を計算する．差の2乗$(Y-f(X))^2$が小さければ，$Y$と$f(X)$は近い値となる．差の2乗を全ての点で合計し，その合計値を最小にする．
+\begin{equation}
+  \label{minimum_required_method}
+  T = \sum_{}^{}(Y-f(X))^2
+\end{equation}
+式(\ref{minimum_required_method})の$T$(合計)が最小となる関数の係数を求める．係数が求まると，任意の$X$での$f(X)$が求まる\cite{minimum_method}．
+ここで，関数$y = a + bx_n$とすると，
+\begin{eqnarray}
+  \label{minimum_method}
+  aN + b\sum_{n}^{}x_n = \sum_{n}^{}y_n \\
+  a\sum_{n}^{}x_n + b\sum_{n}^{}x_n^2 = \sum_{n}^{}x_ny_n
+\end{eqnarray}
+となる．これを連立方程式としてとくと，
+\begin{eqnarray}
+a = \frac{\sum{}^{}y \sum{}^{}x^2 - \sum{}^{}xy\sum{}^{}x^2}{N\sum_{}^{}x^2 - (\sum_{}^{}x)^2}\\
+b = \frac{N\sum{}^{}xy - \sum{}^{}x\sum{}^{}y}{N\sum_{}^{}x^2 - (\sum_{}^{}x)^2}
+\end{eqnarray}
+と求められる．
 
 \section{実験装置と注意事項}
 \subsection{実験装置}
@@ -154,9 +177,12 @@ PID制御の基本形を図\ref{PID-normal-form}に示す．スカラ制御系�
     装置 & 数 & 仕様\\ \hline \hline
     タンク1 & 1 & 高さ 1000[mm]，内径 200[mm] \\ \hline
     タンク2 & 1 & 高さ 1500[mm]，内径 320[mm] \\ \hline
-    電流比例制御弁 & 3 & 弁開度入力信号:4~20[mA]，全開-全閉時間:17[sec]以下，電源:24[VDC]±10\% \\ \hline
+    電流比例制御弁 & 3 &
+    \begin{tabular}{c}
+    弁開度入力信号:4~20[mA]，全開-全閉時間:17[sec]以下，\\電源:24[VDC]±10\%
+    \end{tabular} \\ \hline
     流量計 & 3 & オープンコレクタ出力，0.1[L/pulse] \\ \hline
-    差圧変換器 & 2 & 容量:200[gf/c$m^2$] \\ \hline
+    差圧変換器 & 2 & 容量:200[gf/c${\rm m^2}$] \\ \hline
     A/D変換ボード & 1 & 入力:8CH，0~10[V]，分解能:12[bit]，変換速度:10[sec/CH] \\ \hline
     D/A変換ボード & 1 & 出力:4CH，24[bit] up/down counter，変換速度:10[sec/CH] \\ \hline
     パスカルカウンタボード & 1 & 4CH，24[bit] up/down counter，外部入力:非絶縁TTL入力 \\ \hline
@@ -165,7 +191,7 @@ PID制御の基本形を図\ref{PID-normal-form}に示す．スカラ制御系�
 \end{table}
 \begin{figure}[tb]
   \begin{center}
-    \includegraphics[clip,width=7.0cm]{../img/FigB1_2.png}
+    \includegraphics[clip,width=7.0cm]{../img/fig4.png}
     \caption{実験装置の構成}
     \label{FigB1-2}
   \end{center}
@@ -242,6 +268,19 @@ cd exp3\\
 として計算している．目標水位は40[cm]とした．\\
 %[APPLY AND START]をクリックして実験を開始した．[Apply disturbance]をクリックすると，外乱要素として排水用制御弁の開度が変化するので，その応答を観測し検討した．600サンプル後もしくは[STOP]ボタンをクリックした後，[SAVE OK]をクリックしてデータを保存し，ファイルネーム(英数字)に拡張子(.dat)を付けて保存した．
 
+\section{実験結果}
+\subsection{開ループ実験の実験結果}
+\begin{equation}
+  \label{}
+  h(t) = 0.106v(t) - 0.217
+\end{equation}
+
+\begin{equation}
+  q(t) = i(t)
+\end{equation}
+
+\section{考察}
+
 \section{課題}
 \begin{description}
 \item[(1)]結果をグラフに描き，応答を考察せよ．\\
@@ -255,6 +294,7 @@ PID制御に使用するPID調節器の設計を習得した．
 \begin{thebibliography}{9}
   \bibitem{bibitemPIDControll} 須田信英，PID制御,1998．
   \bibitem{bibitemPendulum} 川田昌克ら，倒立振子で学ぶ制御工学，2017．
+  \bibitem{minimum_method} 神足史人，Excelで操る！ここまでできる科学技術計算，p36，p37，2018．
 \end{thebibliography}
 
 \end{document}
