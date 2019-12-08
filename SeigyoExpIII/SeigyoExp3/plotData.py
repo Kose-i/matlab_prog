@@ -80,7 +80,7 @@ def error_sum(data, t_data, K_p=2.4908, T_p=1516.3, L_p=23.0744):
 #plt.text(x=1530, y=30.5-1, s="実測値")
 #plt.text(x=1530, y=27.5-1, s="Θ(t)=59.15")
 #plt.show()
-##
+
 mat = np.array(csv_read('datasets/bc.CSV'))*100
 data1 = mat[:,data_num]
 time_mat = np.array(range(0, len(mat)))*10
