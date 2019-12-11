@@ -1,4 +1,25 @@
+\documentclass[12pt]{jsarticle}
+
+\setcounter{secnumdepth}{3}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{amsmath}
+\usepackage{subfigure}
+\usepackage{float}
+
+\usepackage{titlesec}
+%\titleformat*{\section}{\tiny\bfseries}
+\titleformat*{\section}{\large}
+\titleformat*{\subsection}{\normalsize\bf}
+
+\setcounter{page}{1}
+\setcounter{section}{5}
+\setcounter{equation}{32}
 
 \begin{document}
-相対誤差の平均は，$2.0345%$となった．
+\section{実験結果}
+最短制御の実験結果の切り替え時間$T_w$後の定常値との相対誤差の平均を次式を用いて算出する．
+\begin{equation}
+E = |\theta(t) - 59.15 | / 59.15
+\end{equation}
+結果は，$2.016\%$となった．
 \end{document}

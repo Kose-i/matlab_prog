@@ -1,0 +1,5 @@
+https://www.wolframalpha.com/
+
+20*log_10(x) = 4.4686
+
+x = 2*pi / 0.0047
