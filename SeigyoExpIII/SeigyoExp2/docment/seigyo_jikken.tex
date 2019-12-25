@@ -75,8 +75,75 @@ $\hat{x}(t)$は状態$x(t)$の推定状態量である．これらより，台�
 \end{equation}
 ただし，$y_r$は台車の目標位置である．制御系全体の構成を図\ref{Fig2-2}に示す．
 \subsection{ステップ応答を用いた二次遅れ系のパラメータ同定}
+二次遅れ系の伝達関数が次式のように与えられているとする．
+\begin{equation}
+  \label{Equation-2-B1}
+  G(s) = \frac{b_0}{s^2+a_1s+a_0}
+\end{equation}
+また，ステップ入力$r$に対する応答が図\ref{Fig2-B1}のような振動的な波形($G(s)$が複素極をもつ)になったとする．この応答波形において，最初のピーク値は，$t=0$以外に最初に$dy(t)/dt = 0$となる時点で生じる．このことを利用すれば，式(\ref{Equation-2-B2})の関係が得られる．
+\begin{equation}
+  \label{Equation-2-B2}
+  a_1 = -\frac{1}{t_m}2{\rm ln}(y_m/y_0 -1),  a_0 = \frac{\pi^2}{t_m^2}+\frac{a_1^2}{4}
+\end{equation}
+ただし，$y_m$は応答波形の最初のピーク値，$t_m$はその時間である．$y_0$は応答の整定値である．また，$b_0=a_0y_0/r$となる．したがって，図\ref{Fig2-B2}を用いて$G(s)$のパラメータが計算できる．
 \subsection{同定結果の検証}
+式(\ref{Equation-B2-4})より，
+\begin{equation}
+  \label{Equation-2-B3}
+  Y(s) = \frac{b_0}{s^2+a_1 s + a_0}R(s),    a_1=\frac{F}{M}, a_0=\frac{\alpha h}{M}, b_0=\frac{a_0 y_0}{r}
+\end{equation}
+である．同定の過程で$R(s)=r/s$としたので，
+\begin{equation}
+  \label{Equation-2-B4}
+  Y(s) = \frac{b_0}{s^2+a_1 s + a_0} R(s) = \frac{\frac{y_0 a_0}{r}}{s^2+a_1s+a_0}\frac{r}{s} = \frac{a_0}{s^2+a_1s+a_0}\frac{1}{s}y_0
+\end{equation}
+と表せる．ここで
+\begin{equation}
+  \label{Equation-2-B5}
+  \frac{a_0}{s^2+a_1s+a_0} = \frac{\omega_n^2}{s^2+2\zeta \omega_ns + \omega_n^2}
+\end{equation}
+と表現しなおすと，式(\ref{Equation-2-B4})は以下のように書ける．
+\begin{equation}
+  \label{Equation-2-B6}
+  Y(s) = \frac{\omega_n^2}{s^2+2\zeta \omega_n s + \omega_n^2}\frac{1}{s}y_0 = y_0(\frac{1}{s} - \frac{s+2\zeta \omega_n}{s^2 + 2\zeta \omega_n s + \omega_n^2})
+\end{equation}
+これを逆ラプラス変換すると，
+\begin{equation}
+  \label{Equation-2-B7}
+  y(t) = y_0 (1 - \frac{1}{\sqrt{1-\zeta^2}}e^{-\beta t} {\rm cos}(\gamma t - \delta))
+\end{equation}
+となる．ただし，$\beta=\zeta \omega_n$，$\gamma =\omega_n \sqrt{1-\zeta^2}$，$\delta={\rm tan}^{-1}(\frac{\zeta}{\sqrt{1-\zeta^2}})$である．$\omega_n=\sqrt{a_0}$，$\zeta=\frac{a_1}{2\sqrt{a_0}}$であることに注意して，上式に各自の求めたパラメータを代入すれば時間応答が得られる．この同定結果に基づく時間応答に基づく時間応答と実験結果を比較し，同定パラメータが妥当か検証する必要がある．
 \subsection{状態フィードバック制御系の設計}
+離散時間プラントが次式で与えられているとする．
+\begin{cases}
+\end{case}
+この系が可制御なら，状態フィードバックにより極配置できる．
+$u(k)=-fx(k)$とすると，閉ループ系は
+\begin{equation}
+  \label{Equation-2-B9}
+  x(k+1) = (P - qf)x(k)
+\end{equation}
+となる．$f$はフィードバック係数ベクトルである．$(P-qf)$の固有値を単位円内の希望の位置に配置するように$f$を決めればよい．特性方程式の係数比較によって$f$を求めることができる．その手順を以下に示す．
+\begin{description}
+  \item[(1)] 希望固有値を$\lambda_1$，$\lambda_2$とし，係数ベクトルを$f=[f_1 f_2]$とする．
+  \item[(2)] $(P-qf)$の特性方程式を計算する．
+    \begin{equation}
+      \label{Equation-2-B10}
+      |\lambda I - (P-qf)| = \lambda^2 + \mu_1 \lambda + \mu_2 = 0
+    \end{equation}
+  \item[(3)] 希望固有値の特性方程式を計算する．
+    \begin{equation}
+      \label{Equation-2-B11}
+      (\lambda - \lambda_1)(\lambda - \lambda_2) = \lambda^2 + \theta_1 \lambda + \theta_2 = 0
+    \end{equation}
+  \item[(4)] 式(\ref{Equation-2-B10})と式(\ref{Equation-2-B11})の係数を比較することにより次の関係を得る．
+    \begin{equation}
+      \label{Equation-2-B12}
+      \mu_1 = \theta_1,  \mu_2 = \theta_2
+    \end{equation}
+\end{description}
+これを解くことにより$f_1$，$f_2$を求める．
+状態$x(k)$が直接観測できない場合には，オブザーバによる推定値$\hat{x}(k)$を用いる．すなわち，$u(k)=-fx(k)$の代わりに，$u(k)=-f\hat{x}(k)$とする．
 \section{実験方法}
 \section{課題}
 \end{document}
