@@ -66,24 +66,27 @@ def modify_MF(t, y, M, F):
 #	file.close()
 	return error_p
 
-tmp_matrix = np.zeros((17, 7000))
+tmp_matrix = np.zeros((17, 71))
 
 if __name__=='__main__':
 	M = 8.120566206902657
 	F = 34.824276941266916
 	print("Initial", modify_MF(time_data, score1, M, F))
 	#min_b = 10
-	for m in np.array(range(7, 10, 1)):
-		for f in np.array(range(3000, 5000, 1)):
-			tmp_matrix[m][f] = modify_MF(time_data, score1, m, f*0.01)
+	for m in np.array(range(4, 16, 2)):
+		for f in np.array(range(17, 71, 1)):
+			tmp_matrix[m][f] = modify_MF(time_data, score1, m, f)*100
 			#min_a = modify_MF(time_data, score1, m, f)
 		plt.figure()
 		mat = tmp_matrix[m][:]
-		plt.plot(np.array(range(0, 7000, 1))*0.01, mat)
-		plt.axis(ymin=0, ymax=0.1)
-		plt.title("M="+str(m))
+		plt.scatter(np.array(range(0, 71, 1)), mat)
+		plt.axis(ymin=0, ymax=20, xmin=17, xmax=71)
+		plt.xlabel("F")
+		plt.ylabel("相対誤差 [%]")
 		plt.show()
-			#min_b = min([min_a, min_b])
+		print("M=", end=' ')
+		print(str(m))
+		#min_b = min([min_a, min_b])
 	#print(min_b)
 	print(tmp_matrix)
 	#print(modify_MF(time_data, score1, M, F))

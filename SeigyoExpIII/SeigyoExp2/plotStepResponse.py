@@ -63,9 +63,14 @@ print("gamma = ", gamma)
 print("delta = ", delta)
 
 plt.figure()
-plt.plot(time_data, score1)
-tmp_y = func_yt(t, y0, zeta, beta, gamma, delta)
-plt.plot(t, tmp_y, linestyle='dashed')
+plt.scatter(time_data, score1)
+plt.xticks([1, 2])
+plt.xlabel("時間 [s]")
+plt.yticks([0.1, 0.2, 0.3, 0.4, 0.5])
+plt.ylabel("位置 [m]")
+plt.axis(xmin=0, xmax=2.5, ymin=0, ymax=0.5)
+tmp_y = func_yt(time_data, y0, zeta, beta, gamma, delta)
+#plt.plot(t, tmp_y, linestyle='dashed')
 plt.show()
 
 def error_mean(y_theory, y):
