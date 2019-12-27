@@ -76,17 +76,14 @@ if __name__=='__main__':
 	for m in np.array(range(4, 17, 1)):
 		for f in np.array(range(0, 70, 1)):
 			tmp_matrix[m][f] = modify_MF(time_data, score1, m, f)
-			#min_a = modify_MF(time_data, score1, m, f)
 		plt.figure()
 		mat = tmp_matrix[m][:]
 		plt.plot(np.array(range(0, 70, 1)), mat)
 		plt.axis(ymin=0, ymax=0.1)
 		plt.title("M="+str(m))
 		plt.show()
-			#min_b = min([min_a, min_b])
-	#print(min_b)
 	print(tmp_matrix)
 	#print(modify_MF(time_data, score1, M, F))
 	#print(modify_MF(time_data, score1, 8.0, 34.0))
 	#print(modify_MF(time_data, score1, 8, 35))
-
+	print(modify_MF(time_data, score1, 8, 50))

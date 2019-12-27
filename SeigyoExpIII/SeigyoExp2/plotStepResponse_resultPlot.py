@@ -15,10 +15,18 @@ time_data = data[:,0] # サンプル番号
 score1    = data[:,1] # 流量[L/min]
 #score2    = data[:,2] # 差圧変換器出力[v]
 
+#plt.figure()
+#plt.plot(time_data, score1)
+
+#tmp_x = np.array(range(0,25, 1))*0.1
+#tmp_y = 0*tmp_x + score1[-1]
+#plt.plot(tmp_x, tmp_y, linestyle='dashed')
+#plt.show()
+
 # 2週目
 h = 10
 r = 0.4
-alpha = 20.09
+alpha = 20.04
 
 y0 = score1[-1]
 
@@ -36,26 +44,24 @@ def modify_MF(t, y, M, F):
 	beta = zeta*omega_n
 	gamma = omega_n*np.sqrt(1-zeta**2)
 	delta = np.arctan(zeta/np.sqrt(1-zeta**2))
-	tmp_y = func_yt(t, y0, zeta, beta, gamma, delta)	
+	tmp_y = func_yt(t, y0, zeta, beta, gamma, delta)
+	plt.figure()
+	plt.plot(t, tmp_y)
+	plt.scatter(t, y)
+	plt.xlabel("時間 [s]")
+	plt.ylabel("位置 [m]")
+	plt.xticks([1, 2.5])
+	plt.yticks([0.1, 0.2, 0.3, 0.4, 0.5, 0.6])
+	plt.axis(xmin=0, xmax=2.5, ymin=0, ymax=0.6)
+	plt.show()
 	error_p = error_mean(tmp_y, y)
-	return error_p
+	return error_p*100#[%]
 
-tmp_matrix = np.zeros((17, 71))
+tmp_matrix = np.zeros((17, 70))
 
 if __name__=='__main__':
-	M = 8.120566206902657
-	F = 34.824276941266916
+	#M = 8.120566206902657
+	#F = 34.824276941266916
+	M = 7.75
+	F = 39.2000
 	print("Initial", modify_MF(time_data, score1, M, F))
-	for m in np.array(range(4, 16, 2)):
-		for f in np.array(range(17, 71, 1)):
-			tmp_matrix[m][f] = modify_MF(time_data, score1, m, f)*100
-			#min_a = modify_MF(time_data, score1, m, f)
-		plt.figure()
-		mat = tmp_matrix[m][:]
-		plt.scatter(np.array(range(0, 71, 1)), mat)
-		plt.axis(ymin=0, ymax=20, xmin=17, xmax=71)
-		plt.xlabel("F")
-		plt.ylabel("相対誤差 [%]")
-		plt.show()
-		print("M=", end=' ')
-		print(str(m))
