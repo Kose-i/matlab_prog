@@ -6,6 +6,7 @@
 \usepackage{amsmath}
 \usepackage{float}
 \usepackage{bm}
+\usepackage{listings}
 
 \pagestyle{myheadings}
 
@@ -13,7 +14,26 @@
 \usepackage{cases}
 \titleformat*{\section}{\large}
 \titleformat*{\subsection}{\normalsize\bf}
-
+\renewcommand{\lstlistingname}{ソースコード}
+\lstset{
+  basicstyle={\ttfamily},
+  language=Python,
+  identifierstyle={\small},
+  commentstyle={\smallitshape},
+  keywordstyle={\small\bfseries},
+  ndkeywordstyle={\small},
+  stringstyle={\small\ttfamily},
+  frame={tb},
+  breaklines=true,
+  columns=[l]{fullflexible},
+  numbers=left,
+  xrightmargin=0zw,
+  xleftmargin=3zw,
+  numberstyle={\scriptsize},
+  stepnumber=1,
+  numbersep=1zw,
+  lineskip=-0.5ex
+}
 \begin{document}
 \section{目的}
 状態フィードバック制御を行うためには全状態量をフィードバックする必要がある．しかしセンサの不足などによって実際に測定できない状態量が存在する場合には，オブザーバ(状態観測器)を用いて状態量を推定し，フィードバック制御に利用する．本実験では，台車の位置制御実験を通じて，オブザーバによる状態フィードバック制御について理解を深める．
@@ -272,7 +292,7 @@ $u(k)=-{\bm f}{\bm x}(k)$とすると，閉ループ系は
 \end{equation}
 ここで，$\alpha = 20.04{\rm [N/V]}$，$h = 10{\rm [s]}$を代入すると，次の関係式が得られる．
 \begin{equation}
-  \label{MF_F_greater}
+  \label{MF_F_greater_changed}
   0 < F < 20\sqrt{2.004 M}
 \end{equation}
 この関係式を満たさない範囲では，時間応答は式(\ref{Response_y_t})とならない．
@@ -280,47 +300,80 @@ $u(k)=-{\bm f}{\bm x}(k)$とすると，閉ループ系は
 まず$M$の値を2毎にとり，$F$の値を1毎にし，相対誤差のグラフを作る．結果は図\ref{Figure-M=4}，\ref{Figure-M=6}，\ref{Figure-M=8}，\ref{Figure-M=10}，\ref{Figure-M=12}，\ref{Figure-M=14}となった．
 \begin{figure}[tb]
   \begin{center}
-    \includegraphics[clip,width=7.0cm]{../img/M=4.png}
+    \includegraphics[clip,width=7.0cm]{../img/M-4.png}
     \caption{M=4とした時の相対誤差}
     \label{Figure-M=4}
   \end{center}
 \end{figure}
 \begin{figure}[tb]
   \begin{center}
-    \includegraphics[clip,width=7.0cm]{../img/M=6.png}
+    \includegraphics[clip,width=7.0cm]{../img/M-6.png}
     \caption{M=6とした時の相対誤差}
     \label{Figure-M=6}
   \end{center}
 \end{figure}
 \begin{figure}[tb]
   \begin{center}
-    \includegraphics[clip,width=7.0cm]{../img/M=8.png}
+    \includegraphics[clip,width=7.0cm]{../img/M-8.png}
     \caption{M=8とした時の相対誤差}
     \label{Figure-M=8}
   \end{center}
 \end{figure}
 \begin{figure}[tb]
   \begin{center}
-    \includegraphics[clip,width=7.0cm]{../img/M=10.png}
+    \includegraphics[clip,width=7.0cm]{../img/M-10.png}
     \caption{M=10とした時の相対誤差}
     \label{Figure-M=10}
   \end{center}
 \end{figure}
 \begin{figure}[tb]
   \begin{center}
-    \includegraphics[clip,width=7.0cm]{../img/M=12.png}
+    \includegraphics[clip,width=7.0cm]{../img/M-12.png}
     \caption{M=12とした時の相対誤差}
     \label{Figure-M=12}
   \end{center}
 \end{figure}
 \begin{figure}[tb]
   \begin{center}
-    \includegraphics[clip,width=7.0cm]{../img/M=14.png}
+    \includegraphics[clip,width=7.0cm]{../img/M-14.png}
     \caption{M=14とした時の相対誤差}
     \label{Figure-M=14}
   \end{center}
 \end{figure}
-これらのグラフより，$M$，$F$の調べる範囲を改めて，$M=[6:10]$，$F=[30:50]$とし，
+これらのグラフより，$M$，$F$の調べる範囲を改めて，$M=[6:10]$，$F=[30:50]$とし，二分探索により最小の相対誤差を取るように$M$，$F$を決定する．実行したソースコードをソースコード\ref{source_python_MF}に示す．
+\newpage
+\begin{lstlisting}[caption = python code, label = source_python_MF]
+m_left ,m_right = 6, 10
+while m_right - m_left>0.0001:
+	m_mid = (m_left + m_right)/2
+	f_left, f_right = 30, 50
+	f_left_score  = modify_MF(t, y, m_mid, f_left)
+	f_right_score = modify_MF(t, y, m_mid, f_right)
+	while f_right - f_left>0.0001:
+		f_mid = (f_left + f_right)/2
+		tmp_error = modify_MF(t, y, m_mid, f_mid)
+		if f_left_score > f_right_score:
+			f_left_score = tmp_error
+			f_left = f_mid
+		else:
+			f_right_score = tmp_error
+			f_right = f_mid
+	if m_left_score > m_right_score:
+		m_left_score = f_left_score
+		m_left = m_mid
+	else:
+		m_right_score = f_left_score
+		m_right = m_mid
+\end{lstlisting}
+結果，$F=40.0001$，$M=7.7496$，相対誤差$2.554[\%]$となった．
+この結果を図\ref{Figure-modify_MF_doutei}に示す．
+\begin{figure}[tb]
+  \begin{center}
+    \includegraphics[clip,width=7.0cm]{../img/modify_MF_doute.png}
+    \caption{M=7.7496, F=40.0001とした時の応答}
+    \label{Figure-modify_MF_doutei}
+  \end{center}
+\end{figure}
 \section{課題}
 \begin{description}
   \item[(1)] 状態量を${\bm z}(t) = [x_1(t) x_2(t) \hat{x}_1(t) \hat{x}_2(t)]^T$としたとき，構成した併合系の状態方程式を求めよ．さらに，レギュレータとオブザーバの極の設定に関して考察せよ．

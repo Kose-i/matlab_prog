@@ -3,7 +3,10 @@ import matplotlib.pyplot as plt
 from matplotlib import rcParams
 import numpy as np
 
+import matplotlib
 import japanize_matplotlib
+#font = {'family':'Yugothic'}
+#matplotlib.rc('font', **font)
 
 rcParams['xtick.direction'] = 'in'
 rcParams['ytick.direction'] = 'in'
@@ -46,13 +49,14 @@ def modify_MF(t, y, M, F):
 	delta = np.arctan(zeta/np.sqrt(1-zeta**2))
 	tmp_y = func_yt(t, y0, zeta, beta, gamma, delta)
 	plt.figure()
-	plt.plot(t, tmp_y)
-	plt.scatter(t, y)
+	plt.plot(t, tmp_y, label='       ')
+	plt.scatter(t, y, label="       ")
 	plt.xlabel("時間 [s]")
 	plt.ylabel("位置 [m]")
 	plt.xticks([1, 2.5])
 	plt.yticks([0.1, 0.2, 0.3, 0.4, 0.5, 0.6])
 	plt.axis(xmin=0, xmax=2.5, ymin=0, ymax=0.6)
+	plt.legend(bbox_to_anchor=(1, 0.4), loc='upper right', borderaxespad=1, fontsize=20)
 	plt.show()
 	error_p = error_mean(tmp_y, y)
 	return error_p*100#[%]
@@ -62,6 +66,6 @@ tmp_matrix = np.zeros((17, 70))
 if __name__=='__main__':
 	#M = 8.120566206902657
 	#F = 34.824276941266916
-	M = 7.75
-	F = 39.2000
+	M = 7.7496
+	F = 40.0001
 	print("Initial", modify_MF(time_data, score1, M, F))

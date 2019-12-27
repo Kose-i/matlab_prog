@@ -24,13 +24,13 @@ y0 = y[-1]
 def func_yt(t, y0, zeta, beta, gamma, delta):
 	return y0*(1-(1/np.sqrt(1-zeta**2))*np.exp(-beta*t)*np.cos(gamma*t - delta))
 def error_mean(y_theory, y):
-#	sum_diff = sum([0 if(e==0) else abs(e-f)/abs(e) for e,f in zip(y_theory, y)])/len(y)
+	sum_diff = sum([0 if(e==0) else abs(e-f)/abs(e) for e,f in zip(y_theory, y)])/len(y)
 #	sum_diff = sum([abs(e-f)*abs(f) for e,f in zip(y_theory, y)])
-	sum_diff = max([abs(e-f) for e,f in zip(y_theory, y)])
+#	sum_diff = max([abs(e-f) for e,f in zip(y_theory, y)])
 	return sum_diff
 
 def modify_MF(t, y, M, F):
-	alpha = 20.04
+	alpha = 20.09
 	h = 10
 	a0 = alpha*h/M
 	a1 = F/M
@@ -67,10 +67,6 @@ if __name__=='__main__':
 		else:
 			m_right_score = f_left_score
 			m_right = m_mid
-		print(m_left, end='-')
-		print(m_right)
-		print(m_left_score, end='-')
-		print(m_right_score)
 	print("F=", end=' ')
 	print(f_mid)
 	print("M=", end=' ')

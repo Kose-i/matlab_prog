@@ -10,7 +10,8 @@ rcParams['ytick.direction'] = 'in'
 
 # 1週目
 input_file = 'datasets/stepResponse.csv'
-data = np.array(pd.read_csv(input_file, delimiter=','))
+data = np.array(pd.read_csv(input_file))
+print(data[0][0])
 time_data = data[:,0] # サンプル番号
 score1    = data[:,1] # 流量[L/min]
 #score2    = data[:,2] # 差圧変換器出力[v]

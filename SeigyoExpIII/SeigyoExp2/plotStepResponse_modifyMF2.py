@@ -11,9 +11,8 @@ rcParams['ytick.direction'] = 'in'
 # 1週目
 input_file = 'datasets/stepResponse.csv'
 data = np.array(pd.read_csv(input_file, delimiter=','))
-time_data = data[:,0] # サンプル番号
-score1    = data[:,1] # 流量[L/min]
-#score2    = data[:,2] # 差圧変換器出力[v]
+time_data = data[:,0]
+score1    = data[:,1]
 
 # 2週目
 h = 10
@@ -38,7 +37,7 @@ def modify_MF(t, y, M, F):
 	delta = np.arctan(zeta/np.sqrt(1-zeta**2))
 	tmp_y = func_yt(t, y0, zeta, beta, gamma, delta)	
 	error_p = error_mean(tmp_y, y)
-	return error_p
+	return error_p*100
 
 tmp_matrix = np.zeros((17, 71))
 
@@ -48,10 +47,9 @@ if __name__=='__main__':
 	print("Initial", modify_MF(time_data, score1, M, F))
 	for m in np.array(range(4, 16, 2)):
 		for f in np.array(range(17, 71, 1)):
-			tmp_matrix[m][f] = modify_MF(time_data, score1, m, f)*100
-			#min_a = modify_MF(time_data, score1, m, f)
-		plt.figure()
+			tmp_matrix[m][f] = modify_MF(time_data, score1, m, f)
 		mat = tmp_matrix[m][:]
+		plt.figure()
 		plt.scatter(np.array(range(0, 71, 1)), mat)
 		plt.axis(ymin=0, ymax=20, xmin=17, xmax=71)
 		plt.xlabel("F")

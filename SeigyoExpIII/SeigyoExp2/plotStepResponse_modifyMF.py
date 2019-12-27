@@ -13,15 +13,6 @@ input_file = 'datasets/stepResponse.csv'
 data = np.array(pd.read_csv(input_file, delimiter=','))
 time_data = data[:,0] # サンプル番号
 score1    = data[:,1] # 流量[L/min]
-#score2    = data[:,2] # 差圧変換器出力[v]
-
-#plt.figure()
-#plt.plot(time_data, score1)
-
-#tmp_x = np.array(range(0,25, 1))*0.1
-#tmp_y = 0*tmp_x + score1[-1]
-#plt.plot(tmp_x, tmp_y, linestyle='dashed')
-#plt.show()
 
 # 2週目
 h = 10
