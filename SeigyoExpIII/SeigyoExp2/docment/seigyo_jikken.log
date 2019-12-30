@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.14159265-p3.7.1-161114-2.6 (utf8.euc) (TeX Live 2017/Debian) (preloaded format=platex 2019.6.25)  27 DEC 2019 12:47
+This is e-pTeX, Version 3.14159265-p3.7.1-161114-2.6 (utf8.euc) (TeX Live 2017/Debian) (preloaded format=platex 2019.6.25)  30 DEC 2019 18:24
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -216,47 +216,52 @@ LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
 (Font)              scaled to size 11.53198pt on input line 38.
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
 (Font)              scaled to size 11.53198pt on input line 38.
+LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
+(Font)              scaled to size 6.72699pt on input line 41.
+LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
+(Font)              scaled to size 4.805pt on input line 41.
+LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
+(Font)              scaled to size 9.60999pt on input line 41.
+LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
+(Font)              scaled to size 6.72699pt on input line 41.
+LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
+(Font)              scaled to size 4.805pt on input line 41.
+File: ../img/B2-1.png Graphic file (type bmp)
+<../img/B2-1.png>
+LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
+(Font)              scaled to size 8.64899pt on input line 45.
+LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
+(Font)              scaled to size 8.64899pt on input line 45.
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <10> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 41.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 50.
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 9.60999pt on input line 41.
+(Font)              scaled to size 9.60999pt on input line 50.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <10> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 41.
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 50.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 9.60999pt on input line 41.
+(Font)              scaled to size 9.60999pt on input line 50.
+ [1
+
+] [2]
+
+LaTeX Warning: Reference `Fig2-2' on page 3 undefined on input line 106.
+
+File: ../img/B2-2.png Graphic file (type bmp)
+<../img/B2-2.png>
+[3]
+File: ../img/2-B1.png Graphic file (type bmp)
+<../img/2-B1.png>
 
 
-LaTeX Warning: Reference `B2-1' on page 1 undefined on input line 41.
+LaTeX Warning: Reference `Fig2-B2' on page 4 undefined on input line 132.
 
-LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 6.72699pt on input line 41.
-LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 4.805pt on input line 41.
-LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 6.72699pt on input line 41.
-LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 4.805pt on input line 41.
-[1
-
-]
-
-LaTeX Warning: Reference `Fig2-2' on page 2 undefined on input line 98.
-
-[2]
-
-LaTeX Warning: Reference `Fig2-B1' on page 3 undefined on input line 105.
-
-
-LaTeX Warning: Reference `Fig2-B2' on page 3 undefined on input line 110.
-
-[3] [4] [5]
+[4] [5] [6]
 File: ../img/doutei.png Graphic file (type bmp)
 <../img/doutei.png>
-LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
-(Font)              scaled to size 8.64899pt on input line 218.
-LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 8.64899pt on input line 218.
- [6] [7]
+ [7] [8]
+File: ../img/Initial_MF_doutei.png Graphic file (type bmp)
+<../img/Initial_MF_doutei.png>
+ [9]
 File: ../img/M-4.png Graphic file (type bmp)
 <../img/M-4.png>
 File: ../img/M-6.png Graphic file (type bmp)
@@ -269,45 +274,37 @@ File: ../img/M-12.png Graphic file (type bmp)
 <../img/M-12.png>
 File: ../img/M-14.png Graphic file (type bmp)
 <../img/M-14.png>
- [8]
 LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
-(Font)              scaled to size 6.72699pt on input line 346.
+(Font)              scaled to size 6.72699pt on input line 374.
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 8.64899pt on input line 346.
+(Font)              scaled to size 8.64899pt on input line 374.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 8.64899pt on input line 346.
+(Font)              scaled to size 8.64899pt on input line 374.
 LaTeX Font Info:    Font shape `JT1/gt/bx/n' in size <9> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 347.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 375.
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 8.64899pt on input line 347.
+(Font)              scaled to size 8.64899pt on input line 375.
 LaTeX Font Info:    Font shape `JY1/gt/bx/n' in size <9> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 347.
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 375.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 8.64899pt on input line 347.
+(Font)              scaled to size 8.64899pt on input line 375.
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <9> not available
-(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 347.
- [9] [10]
-
-LaTeX Warning: Reference `Figure-modify_MF_doutei' on page 11 undefined on inpu
-t line 369.
-
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 375.
+ [10] [11]
 File: ../img/modify_MF_doute.png Graphic file (type bmp)
 <../img/modify_MF_doute.png>
-[11] [12] (./seigyo_jikken.aux)
+ [12] [13] [14] [15] (./seigyo_jikken.aux)
 
 LaTeX Warning: There were undefined references.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
  ) 
 Here is how much of TeX's memory you used:
- 3324 strings out of 494735
- 43189 string characters out of 6176126
- 165291 words of memory out of 5000000
- 6811 multiletter control sequences out of 15000+600000
+ 3344 strings out of 494735
+ 43567 string characters out of 6176126
+ 169291 words of memory out of 5000000
+ 6827 multiletter control sequences out of 15000+600000
  14334 words of font info for 64 fonts, out of 8000000 for 9000
  269 hyphenation exceptions out of 8191
  27i,12n,40p,408b,1714s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on seigyo_jikken.dvi (12 pages, 28432 bytes).
+Output written on seigyo_jikken.dvi (15 pages, 34052 bytes).

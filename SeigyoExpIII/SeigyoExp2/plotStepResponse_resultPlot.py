@@ -64,8 +64,8 @@ def modify_MF(t, y, M, F):
 tmp_matrix = np.zeros((17, 70))
 
 if __name__=='__main__':
-	#M = 8.120566206902657
-	#F = 34.824276941266916
-	M = 7.7496
-	F = 40.0001
+	M = 8.120566206902657
+	F = 34.824276941266916
+	#M = 7.7496
+	#F = 40.0001
 	print("Initial", modify_MF(time_data, score1, M, F))
