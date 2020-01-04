@@ -39,7 +39,7 @@
 状態フィードバック制御を行うためには全状態量をフィードバックする必要がある．しかしセンサの不足などによって実際に測定できない状態量が存在する場合には，オブザーバ(状態観測器)を用いて状態量を推定し，フィードバック制御に利用する．本実験では，台車の位置制御実験を通じて，オブザーバによる状態フィードバック制御について理解を深める．
 \section{実験装置の概要}
 制御系の構成の概要を図\ref{B2-1}に示す．制御目的は，レール上の台車を目的位置に移動させ，停止させることである．モータドライバに電圧を加えるとモータが回転し，ベルトで台車を移動させる．台車の変位$y$はポテンシャルメータで電圧値として検出され，A/D変換器を介して制御用計算機に送られる．計算機でモータドライバへの指令電圧$u$が計算され，D/A変換を介して出力される．
-\begin{figure}[tb]
+\begin{figure}[H]
   \begin{center}
     \includegraphics[clip,width=7.0cm]{../img/B2-1.png}
     \caption{実験書の記述}%TODO
@@ -96,12 +96,12 @@ $M$は台車の等価質量，$F$はレールとの間の摩擦係数である�
   \label{Equation-B2-9}
   \dot{\hat{\bm x}}(t) &=& {\bm A} \hat{\bm x} + {\bm b}u(t) + {\bm k}(y(t) - \hat{y}(t)) \\
   \label{Equation-B2-10}
-  \hat{y}(t) &=& c\hat{\bm x}(t)
+  \hat{y}(t) &=& {\bm c}\hat{\bm x}(t)
 \end{eqnarray}
 $\hat{\bm x}(t)$は状態${\bm x}(t)$の推定状態量である．これらより，台車を初期位置から目標位置に移動させる制御は次の入力を用いることによって達成される．
 \begin{equation}
   \label{Equation-B2-11}
-  u(t) = -f \hat{\bm x}(t) = \left[\begin{array}{cc}-f_1&-f_2\end{array}\right]\left[\begin{array}{cc}(\hat{x}_1(t)-y_r)&\hat{x}_2(t)\end{array}\right]^T
+  u(t) = -{\bm f} \hat{\bm x}(t) = \left[\begin{array}{cc}-f_1&-f_2\end{array}\right]\left[\begin{array}{cc}(\hat{x}_1(t)-y_r)&\hat{x}_2(t)\end{array}\right]^T
 \end{equation}
 ただし，$y_r$は台車の目標位置である．制御系全体の構成を図\ref{Fig2-2}に示す．
 \begin{figure}[tb]
@@ -327,42 +327,42 @@ $u(k)=-{\bm f}{\bm x}(k)$とすると，閉ループ系は
 この関係式を満たさない範囲では，時間応答は式(\ref{Response_y_t})とならない．
 ここで，$M=[4:16]$，$F=[17:36]$の範囲で相対誤差の最小値を求める．
 まず$M$の値を2毎にとり，$F$の値を1毎にし，相対誤差のグラフを作る．結果は図\ref{Figure-M=4}，\ref{Figure-M=6}，\ref{Figure-M=8}，\ref{Figure-M=10}，\ref{Figure-M=12}，\ref{Figure-M=14}となった．
-\begin{figure}[tb]
+\begin{figure}[H]
   \begin{center}
     \includegraphics[clip,width=7.0cm]{../img/M-4.png}
     \caption{M=4とした時の相対誤差}
     \label{Figure-M=4}
   \end{center}
 \end{figure}
-\begin{figure}[tb]
+\begin{figure}[H]
   \begin{center}
     \includegraphics[clip,width=7.0cm]{../img/M-6.png}
     \caption{M=6とした時の相対誤差}
     \label{Figure-M=6}
   \end{center}
 \end{figure}
-\begin{figure}[tb]
+\begin{figure}[H]
   \begin{center}
     \includegraphics[clip,width=7.0cm]{../img/M-8.png}
     \caption{M=8とした時の相対誤差}
     \label{Figure-M=8}
   \end{center}
 \end{figure}
-\begin{figure}[tb]
+\begin{figure}[H]
   \begin{center}
     \includegraphics[clip,width=7.0cm]{../img/M-10.png}
     \caption{M=10とした時の相対誤差}
     \label{Figure-M=10}
   \end{center}
 \end{figure}
-\begin{figure}[tb]
+\begin{figure}[H]
   \begin{center}
     \includegraphics[clip,width=7.0cm]{../img/M-12.png}
     \caption{M=12とした時の相対誤差}
     \label{Figure-M=12}
   \end{center}
 \end{figure}
-\begin{figure}[tb]
+\begin{figure}[H]
   \begin{center}
     \includegraphics[clip,width=7.0cm]{../img/M-14.png}
     \caption{M=14とした時の相対誤差}
@@ -370,28 +370,29 @@ $u(k)=-{\bm f}{\bm x}(k)$とすると，閉ループ系は
   \end{center}
 \end{figure}
 これらのグラフより，$M$，$F$の調べる範囲を改めて，$M=[6:10]$，$F=[30:50]$とし，二分探索により最小の相対誤差を取るように$M$，$F$を決定する．実行したソースコードをソースコード\ref{source_python_MF}に示す．
+\newpage
 \begin{lstlisting}[caption = python code, label = source_python_MF]
 m_left ,m_right = 6, 10
 while m_right - m_left>0.0001:
-	m_mid = (m_left + m_right)/2
-	f_left, f_right = 30, 50
-	f_left_score  = modify_MF(t, y, m_mid, f_left)
-	f_right_score = modify_MF(t, y, m_mid, f_right)
-	while f_right - f_left>0.0001:
-		f_mid = (f_left + f_right)/2
-		tmp_error = modify_MF(t, y, m_mid, f_mid)
-		if f_left_score > f_right_score:
-			f_left_score = tmp_error
-			f_left = f_mid
-		else:
-			f_right_score = tmp_error
-			f_right = f_mid
-	if m_left_score > m_right_score:
-		m_left_score = f_left_score
-		m_left = m_mid
-	else:
-		m_right_score = f_left_score
-		m_right = m_mid
+    m_mid = (m_left + m_right)/2
+    f_left, f_right = 30, 50
+    f_left_score  = modify_MF(t, y, m_mid, f_left)
+    f_right_score = modify_MF(t, y, m_mid, f_right)
+    while f_right - f_left>0.0001:
+        f_mid = (f_left + f_right)/2
+        tmp_error = modify_MF(t, y, m_mid, f_mid)
+        if f_left_score > f_right_score:
+            f_left_score = tmp_error
+            f_left = f_mid
+        else:
+            f_right_score = tmp_error
+            f_right = f_mid
+    if m_left_score > m_right_score:
+        m_left_score = f_left_score
+        m_left = m_mid
+    else:
+        m_right_score = f_left_score
+        m_right = m_mid
 \end{lstlisting}
 結果，$F=40.0001$，$M=7.7496$，相対誤差$2.554[\%]$となった．
 この結果を図\ref{Figure-modify_MF_doutei}に示す．
@@ -411,21 +412,21 @@ while m_right - m_left>0.0001:
 可制御性行列$A_C$は
 \begin{equation}
   \label{}
-  A_C = \left[\begin{array}{cc}b & Ab\end{array}\right]
+  \bm A_C = \left[\begin{array}{cc}{\bm b} & {\bm A}{\bm b}\end{array}\right]
 \end{equation}
 である．
 不可制御な系では，次式が満たされる．
 \begin{equation}
-  {\rm det} (A_C) = 0
+  {\rm det} ({\bm A_C}) = 0
 \end{equation}
 可観測性行列$A_O$は
 \begin{equation}
   \label{}
-  A_O = \left[\begin{array}{c}c\\cA\end{array}\right]
+  \bm A_O = \left[\begin{array}{c}{\bm c}\\{\bm c}{\bm A}\end{array}\right]
 \end{equation}である．
 不可観測な系では，次式が満たされる．
 \begin{equation}
-  {\rm det} (A_O) = 0
+  {\rm det} ({\bm A_O}) = 0
 \end{equation}
 
 また状態方程式より特性方程式は
