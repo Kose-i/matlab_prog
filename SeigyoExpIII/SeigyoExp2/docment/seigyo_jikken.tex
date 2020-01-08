@@ -406,7 +406,7 @@ while m_right - m_left>0.0001:
 このことにより，状態方程式は次のように表せる．
 \begin{equation}
   \label{dotx-Ax+bu}
-  \dot{\bm x}(t) = \left[\begin{array}{cc}0&1\\0&-5.1616\end{array}\right]x(t) + \left[\begin{array}{c}0\\2.5924\end{array}\right]u(t)
+  \dot{\bm x}(t) = \left[\begin{array}{cc}0&1\\0&-5.1616\end{array}\right]{\bm x}(t) + \left[\begin{array}{c}0\\2.5924\end{array}\right]u(t)
 \end{equation}
 フィードバックゲインベクトル$\bm f$，$\bm k$を次のように設定する．
 可制御性行列$A_C$は
@@ -452,27 +452,46 @@ while m_right - m_left>0.0001:
   (s - \lambda_3)(s - \lambda_4)=s^2-(\lambda_3+\lambda_4)s+\lambda_3 \lambda_4
 \end{equation}
 である．
-\begin{description}
-  \item[1] 固有値を$\lambda_1=-10$，$\lambda_2=-10$，$\lambda_3=-10$，$\lambda_4=-10$としたもの\\
-係数比較により$f_1=38.5743$，$f_2=5.7238$，$k_1=14.8384$，$k_2=23.4101$となる．
-  \item[2] 固有値を$\lambda_1=-15$，$\lambda_2=-15$，$\lambda_3=-15$，$\lambda_4=-15$としたもの\\
-係数比較により$f_1=86.7922$，$f_2=9.5812$，$k_1=24.8384$，$k_2=96.7941$となる．
-  \item[3] 固有値を$\lambda_1=10$，$\lambda_2=10$，$\lambda_3=-10$，$\lambda_4=-10$としたもの\\
-係数比較により$f_1=38.5743$，$f_2=5.7238$，$k_1=14.8384$，$k_2=23.4101$となる．
-  \item[4] 固有値を$\lambda_1=-10$，$\lambda_2=-10$，$\lambda_3=10$，$\lambda_4=10$としたもの\\
-係数比較により$f_1=38.5743$，$f_2=5.7238$，$k_1=14.8384$，$k_2=229.8741$となる．
-\end{description}
+
+\begin{table}[tb]
+  \label{TableB1-2}
+  \caption{装置の仕様}
+  \begin{tabular}{|c|c|c|c|c|c|c|c|} \hline
+    $\lambda_1$ & $\lambda_2$ & $\lambda_3$ & $\lambda_4$ & $f_1$ & $f_2$ & $k_1$ & $k_2$\\ \hline \hline
+    $-10$ & $-10$ & $-10$ & $-10$ & $38.5743$ & $5.7238$ & $14.8384$ & $23.4101$ \\ \hline
+    $-30$ & $-30$ & $-10$ & $-10$ & $347.1686$ & $21.1535$ & $14.8384$ & $23.4101$ \\ \hline
+    $-10$ & $-10$ & $-30$ & $-30$ & $38.5743$ & $5.7238$ & $54.8384$ & $616.9461$ \\ \hline
+    $-30$ & $-30$ & $-30$ & $-30$ & $347.1686$ & $21.1535$ & $54.8384$ & $616.9461$ \\ \hline
+     $10$ &  $10$ & $-10$ & $-10$ & $$ & $$ & $14.8384$ & $23.4101$ \\ \hline
+    $-10$ & $-10$ & $10$  &  $10$ & $38.5743$ & $5.7238$ & $$ & $$ \\ \hline
+    $-10$ & $-10$ & $0$  &  $0$ & $38.5743$ & $5.7238$ & $$ & $$ \\ \hline
+    $0$ & $0$ & $-10$  &  $-10$ & $38.5743$ & $5.7238$ & $$ & $$ \\ \hline
+  \end{tabular}
+\end{table}
 \section{課題}
 \begin{description}
   \item[(1)] 状態量を${\bm z}(t) = \left[\begin{array}{cccc}x_1(t) & x_2(t) & \hat{x}_1(t) & \hat{x}_2(t)\end{array}\right]^T$としたとき，構成した併合系の状態方程式を求めよ．さらに，レギュレータとオブザーバの極の設定に関して考察せよ．
+  まず状態方程式は次のようになる．
 \begin{eqnarray}
   \label{kadai-1}
   {\bm \dot{z}}(t) &=& \left[\begin{array}{cc}{\bm A}&{\bm 0}\\{\bm 0}&{\bm A}\end{array}\right] {\bm z}(t) + \left[\begin{array}{c}{\bm b}\\{\bm b}\end{array}\right] u(t) + \left[\begin{array}{c}{\bm 0}\\{\bm K}\end{array}\right] (y(t) - \hat{y}(t)) \nonumber \\
-&=& \left[\begin{array}{cc}{\bm A}&{\bm 0}\\{\bm 0}&{\bm A}\end{array}\right] {\bm z}(t) + \left[\begin{array}{c}{\bm b}\\{\bm b}\end{array}\right] u(t) + \left[\begin{array}{c}{\bm 0}\\{\bm K}\end{array}\right] \left[\begin{array}{cc}{\bm c}{\bm I}&{\bm 0}\\{\bm 0}&-{\bm c}{\bm I}\end{array}\right]{\bm z}(t) \nonumber \\
-&=& \left[\begin{array}{cc}{\bm A}&{\bm 0}\\{\bm 0}&{\bm A}-{\bm K}{\bm c}\end{array}\right] {\bm z}(t) + \left[\begin{array}{c}{\bm b}\\{\bm b}\end{array}\right] u(t) \nonumber \\
-&=& \left[\begin{array}{cc}{\bm A}&{\bm 0}\\{\bm 0}&{\bm A}-{\bm K}{\bm c}\end{array}\right] {\bm z}(t) - \left[\begin{array}{c}{\bm b}\\{\bm b}\end{array}\right] \left[\begin{array}{cc}{\bm f}&{\bm 0}\end{array}\right]{\bm z}(t) \nonumber \\
-&=& \left[\begin{array}{cc}{\bm A}-{\bm b}{\bm f}&{\bm 0}\\-{\bm b}{\bm f}&{\bm A}-{\bm K}{\bm c}\end{array}\right] {\bm z}(t)
+&=& \left[\begin{array}{cc}{\bm A}&{\bm 0}\\{\bm 0}&{\bm A}\end{array}\right] {\bm z}(t) + \left[\begin{array}{c}{\bm b}\\{\bm b}\end{array}\right] u(t) + \left[\begin{array}{c}{\bm 0}\\{\bm K}\end{array}\right] \left[\begin{array}{cc}{\bm c}&-{\bm c}\end{array}\right]{\bm z}(t) \nonumber \\
+&=& \left[\begin{array}{cc}{\bm A}&{\bm 0}\\{\bm K}{\bm c}&{\bm A}-{\bm K}{\bm c}\end{array}\right] {\bm z}(t) + \left[\begin{array}{c}{\bm b}\\{\bm b}\end{array}\right] u(t) \nonumber \\
+&=& \left[\begin{array}{cc}{\bm A}&{\bm 0}\\{\bm K}{\bm c}&{\bm A}-{\bm K}{\bm c}\end{array}\right] {\bm z}(t) - \left[\begin{array}{c}{\bm b}\\{\bm b}\end{array}\right] \left[\begin{array}{cc}{\bm 0}&{\bm f}\end{array}\right]{\bm z}(t) \nonumber \\
+&=& \left[\begin{array}{cc}{\bm A}&-{\bm b}{\bm f}\\{\bm K}{\bm c}&{\bm A}-{\bm K}{\bm c}-{\bm b}{\bm f}\end{array}\right] {\bm z}(t)
 \end{eqnarray}
+  つぎに，レギュレータとオブザーバについては次のようになる．
+\begin{equation}
+  \frac{d}{dt} \left[\begin{array}{c}{\bm x}\\{\bm x}-\hat{\bm x}\end{array}\right] = \left[\begin{array}{cc}{\bm A}-{\bm b}{\bm f}&{\bm b}{\bm f}\\{\bm 0}&{\bm A}-{\bm K}{\bm c}\end{array}\right] \left[\begin{array}{c}{\bm x}\\{\bm x}-\hat{\bm x}\end{array}\right]
+\end{equation}
+特性方程式として次式を得る．
+\begin{eqnarray}
+  det( s{\bm I} - \left[\begin{array}{cc}{\bm A}-{\bm b}{\bm f}&{\bm b}{\bm f}\\{\bm 0}&{\bm A}-{\bm K}{\bm c}\end{array}\right] )\nonumber \\ &=& det(s{\bm I} - {\bm A} + {\bm b}{\bm f})det(s{\bm I} - {\bm A} + {\bm K}{\bm c}) \nonumber \\
+  &=& 0
+\end{eqnarray}
+すなわち，状態フィードバックゲイン
+\begin{equation}
+\end{equation}
   \item[(2)] 制御結果について考察し，収束速度を上げる．過渡応答の振動を抑える，もしくは入力量を抑えるような結果を得るためには，制御系をどのように改良すればよいか検討せよ．
 \end{description}
 \end{document}
