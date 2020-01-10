@@ -42,7 +42,7 @@
 \begin{figure}[H]
   \begin{center}
     \includegraphics[clip,width=7.0cm]{../img/B2-1.png}
-    \caption{実験書の記述}%TODO
+    \caption{台車制御系の概要}
     \label{B2-1}
   \end{center}
 \end{figure}
@@ -107,7 +107,7 @@ $\hat{\bm x}(t)$は状態${\bm x}(t)$の推定状態量である．これらよ�
 \begin{figure}[tb]
   \begin{center}
     \includegraphics[clip,width=7.0cm]{../img/B2-2.png}
-    \caption{実験書の記述}%TODO
+    \caption{台車制御系の状態方程式}
     \label{B2-2}
   \end{center}
 \end{figure}
@@ -121,7 +121,7 @@ $\hat{\bm x}(t)$は状態${\bm x}(t)$の推定状態量である．これらよ�
 \begin{figure}[tb]
   \begin{center}
     \includegraphics[clip,width=7.0cm]{../img/2-B1.png}
-    \caption{実験書の記述}%TODO
+    \caption{二次遅れ系のステップ応答}
     \label{Fig2-B1}
   \end{center}
 \end{figure}
@@ -454,20 +454,341 @@ while m_right - m_left>0.0001:
 である．
 
 \begin{table}[tb]
-  \label{TableB1-2}
-  \caption{装置の仕様}
-  \begin{tabular}{|c|c|c|c|c|c|c|c|} \hline
-    $\lambda_1$ & $\lambda_2$ & $\lambda_3$ & $\lambda_4$ & $f_1$ & $f_2$ & $k_1$ & $k_2$\\ \hline \hline
-    $-10$ & $-10$ & $-10$ & $-10$ & $38.5743$ & $5.7238$ & $14.8384$ & $23.4101$ \\ \hline
-    $-30$ & $-30$ & $-10$ & $-10$ & $347.1686$ & $21.1535$ & $14.8384$ & $23.4101$ \\ \hline
-    $-10$ & $-10$ & $-30$ & $-30$ & $38.5743$ & $5.7238$ & $54.8384$ & $616.9461$ \\ \hline
-    $-30$ & $-30$ & $-30$ & $-30$ & $347.1686$ & $21.1535$ & $54.8384$ & $616.9461$ \\ \hline
-     $10$ &  $10$ & $-10$ & $-10$ & $$ & $$ & $14.8384$ & $23.4101$ \\ \hline
-    $-10$ & $-10$ & $10$  &  $10$ & $38.5743$ & $5.7238$ & $$ & $$ \\ \hline
-    $-10$ & $-10$ & $0$  &  $0$ & $38.5743$ & $5.7238$ & $$ & $$ \\ \hline
-    $0$ & $0$ & $-10$  &  $-10$ & $38.5743$ & $5.7238$ & $$ & $$ \\ \hline
-  \end{tabular}
+  \begin{center}
+    \label{TableB1-2}
+    \caption{実験}
+    \begin{tabular}{|c|c|c|c|c|c|c|c|} \hline
+      $\lambda_1$ & $\lambda_2$ & $\lambda_3$ & $\lambda_4$  & $f_1$ & $f_2$ & $k_1$ & $k_2$\\ \hline \hline
+      $-10$ & $-10$ & $-10$ & $-10$ & $38.5743$  & $5.7238$  & $14.8384$  & $23.4101$  \\ \hline
+      $-30$ & $-30$ & $-10$ & $-10$ & $347.1686$ & $21.1535$ & $14.8384$  & $23.4101$  \\ \hline
+      $-10$ & $-10$ & $-30$ & $-30$ & $38.5743$  & $5.7238$  & $54.8384$  & $616.9461$ \\ \hline
+      $-30$ & $-30$ & $-30$ & $-30$ & $347.1686$ & $21.1535$ & $54.8384$  & $616.9461$ \\ \hline
+       $10$ &  $10$ & $-10$ & $-10$ & $38.5743$  & $-9.7059$ & $14.8384$  & $23.4101$  \\ \hline
+      $-10$ & $-10$ & $10$  &  $10$ & $38.5743$  & $5.7238$  & $-25.1616$ & $229.8741$ \\ \hline
+      $-10$ & $-10$ & $0$   & $0$   & $38.5743$  & $5.7238$  & $-5.1616$  & $26.6421$  \\ \hline
+      $0$   & $0$   & $-10$ & $-10$ & $0$        & $-1.9911$ & $14.8384$  & $23.4101$  \\ \hline
+      $-10$ & $-10$ & $30$  & $30$  & $38.5743$  & $5.7238$  & $-65.1616$ & $1236.3381$\\ \hline
+      $-5$  & $-5$  & $-5$  & $-5$  & $9.6436$   & $1.8664$  & $4.8384$   & $0.0261$   \\ \hline
+      $-5$  & $-5$  & $-10$ & $-10$ & $9.6436$   & $1.8664$  & $14.8384$  & $23.4101$  \\ \hline
+      $-20$ & $-20$ & $-20$ & $-20$ & $154.2972$ & $13.4387$ & $34.8384$  & $220.1781$ \\ \hline
+      $-20$ & $-20$ & $-30$ & $-30$ & $154.2972$ & $13.4387$ & $54.8384$  & $616.9461$ \\ \hline
+      $-15$ & $-15$ & $-20$ & $-20$ & $86.7922$  & $9.5812$  & $34.8384$  & $220.1781$ \\ \hline
+    \end{tabular}
+  \end{center}
 \end{table}
+
+\clearpage
+\newpage
+\newpage
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp1-1.png}
+    \caption{}
+    \label{Exp1-1}
+  \end{center}
+\end{figure}
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp1-2.png}
+    \caption{}
+    \label{Exp1-2}
+  \end{center}
+\end{figure}
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp1-3.png}
+    \caption{}
+    \label{Exp1-3}
+  \end{center}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp2-1.png}
+    \caption{}
+    \label{Exp2-1}
+  \end{center}
+\end{figure}
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp2-2.png}
+    \caption{}
+    \label{Exp2-2}
+  \end{center}
+\end{figure}
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp2-3.png}
+    \caption{}
+    \label{Exp2-3}
+  \end{center}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp3-1.png}
+    \caption{}
+    \label{Exp3-1}
+  \end{center}
+\end{figure}
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp3-2.png}
+    \caption{}
+    \label{Exp3-2}
+  \end{center}
+\end{figure}
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp3-3.png}
+    \caption{}
+    \label{Exp3-3}
+  \end{center}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp4-1.png}
+    \caption{}
+    \label{Exp4-1}
+  \end{center}
+\end{figure}
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp4-2.png}
+    \caption{}
+    \label{Exp4-2}
+  \end{center}
+\end{figure}
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp4-3.png}
+    \caption{}
+    \label{Exp4-3}
+  \end{center}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp5-1.png}
+    \caption{}
+    \label{Exp5-1}
+  \end{center}
+\end{figure}
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp5-2.png}
+    \caption{}
+    \label{Exp5-2}
+  \end{center}
+\end{figure}
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp5-3.png}
+    \caption{}
+    \label{Exp5-3}
+  \end{center}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp6-1.png}
+    \caption{}
+    \label{Exp6-1}
+  \end{center}
+\end{figure}
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp6-2.png}
+    \caption{}
+    \label{Exp6-2}
+  \end{center}
+\end{figure}
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp6-3.png}
+    \caption{}
+    \label{Exp6-3}
+  \end{center}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp7-1.png}
+    \caption{}
+    \label{Exp7-1}
+  \end{center}
+\end{figure}
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp7-2.png}
+    \caption{}
+    \label{Exp7-2}
+  \end{center}
+\end{figure}
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp7-3.png}
+    \caption{}
+    \label{Exp7-3}
+  \end{center}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp8-1.png}
+    \caption{}
+    \label{Exp8-1}
+  \end{center}
+\end{figure}
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp8-2.png}
+    \caption{}
+    \label{Exp8-2}
+  \end{center}
+\end{figure}
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp8-3.png}
+    \caption{}
+    \label{Exp8-3}
+  \end{center}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp9-1.png}
+    \caption{}
+    \label{Exp9-1}
+  \end{center}
+\end{figure}
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp9-2.png}
+    \caption{}
+    \label{Exp9-2}
+  \end{center}
+\end{figure}
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp9-3.png}
+    \caption{}
+    \label{Exp9-3}
+  \end{center}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp10-1.png}
+    \caption{}
+    \label{Exp10-1}
+  \end{center}
+\end{figure}
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp10-2.png}
+    \caption{}
+    \label{Exp10-2}
+  \end{center}
+\end{figure}
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp10-3.png}
+    \caption{}
+    \label{Exp10-3}
+  \end{center}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp11-1.png}
+    \caption{}
+    \label{Exp11-1}
+  \end{center}
+\end{figure}
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp11-2.png}
+    \caption{}
+    \label{Exp11-2}
+  \end{center}
+\end{figure}
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp11-3.png}
+    \caption{}
+    \label{Exp11-3}
+  \end{center}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp12-1.png}
+    \caption{}
+    \label{Exp12-1}
+  \end{center}
+\end{figure}
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp12-2.png}
+    \caption{}
+    \label{Exp12-2}
+  \end{center}
+\end{figure}
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp12-3.png}
+    \caption{}
+    \label{Exp12-3}
+  \end{center}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp13-1.png}
+    \caption{}
+    \label{Exp13-1}
+  \end{center}
+\end{figure}
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp13-2.png}
+    \caption{}
+    \label{Exp13-2}
+  \end{center}
+\end{figure}
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp13-3.png}
+    \caption{}
+    \label{Exp13-3}
+  \end{center}
+\end{figure}
+
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp14-1.png}
+    \caption{}
+    \label{Exp14-1}
+  \end{center}
+\end{figure}
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp14-2.png}
+    \caption{}
+    \label{Exp14-2}
+  \end{center}
+\end{figure}
+\begin{figure}[H]
+  \begin{center}
+    \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp14-3.png}
+    \caption{}
+    \label{Exp14-3}
+  \end{center}
+\end{figure}
+
 \section{課題}
 \begin{description}
   \item[(1)] 状態量を${\bm z}(t) = \left[\begin{array}{cccc}x_1(t) & x_2(t) & \hat{x}_1(t) & \hat{x}_2(t)\end{array}\right]^T$としたとき，構成した併合系の状態方程式を求めよ．さらに，レギュレータとオブザーバの極の設定に関して考察せよ．
@@ -489,9 +810,25 @@ while m_right - m_left>0.0001:
   det( s{\bm I} - \left[\begin{array}{cc}{\bm A}-{\bm b}{\bm f}&{\bm b}{\bm f}\\{\bm 0}&{\bm A}-{\bm K}{\bm c}\end{array}\right] )\nonumber \\ &=& det(s{\bm I} - {\bm A} + {\bm b}{\bm f})det(s{\bm I} - {\bm A} + {\bm K}{\bm c}) \nonumber \\
   &=& 0
 \end{eqnarray}
-すなわち，状態フィードバックゲイン
+すなわち，状態フィードバックゲイン$k$とオブザーバゲイン$K$を設計するに当たって，それぞれに対応する二つの独立な特性方程式を用いれば良いことになる．すなわち，
+  \begin{description}
+    \item 状態フィードバック制御系の特性方程式:
+    \begin{equation}
+      {\rm det}(s{\bm I} - {\bm A} + {\bm b}{\bm f}) = 0
+    \end{equation}
+    \item オブザーバの特性方程式:
+    \begin{equation}
+      {\rm det}(s{\bm I} - {\bm A} + {\bm K}{\bm c}) = 0
+    \end{equation}
+  \end{description}
+である．したがって，制御とオブザーバのダイナミクスは独立に考えてよく，それぞれの系が安定であれば併合系も安定となり，双方のゲインは独立に設計が可能であることが分かる．これは制御と観測に関する分離定理として知られている\ref{bibitemMechatoronics}．
 \begin{equation}
 \end{equation}
   \item[(2)] 制御結果について考察し，収束速度を上げる．過渡応答の振動を抑える，もしくは入力量を抑えるような結果を得るためには，制御系をどのように改良すればよいか検討せよ．
 \end{description}
+
+\begin{thebibliography}{9}
+  \bibitem{bibitemMechatoronics} 坂本哲三，電気機器の電気力学と制御，p157，p158，2018．
+\end{thebibliography}
+
 \end{document}
