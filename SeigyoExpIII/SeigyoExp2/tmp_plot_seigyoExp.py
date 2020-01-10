@@ -8,7 +8,7 @@ import japanize_matplotlib
 rcParams['xtick.direction'] = 'in'
 rcParams['ytick.direction'] = 'in'
 
-input_file = 'datasets/tamura3'
+input_file = 'datasets/tamura6'
 data = np.array(pd.read_csv(input_file, delimiter=' \t', header=1))
 
 time_data = data[:,0] # Time[s]
@@ -18,35 +18,42 @@ score3    = data[:,3] # Expect Pos[m]
 score4    = data[:,4] # Expect Vel[m/s]
 score5    = data[:,5] # Vel[m/s]
 
-def plot_engine():
+def plot_5_10():
     fig = plt.figure(figsize=(13.0, 4.4))
     plt.plot(time_data, score1, label="位置", linewidth=1, marker='.')
     plt.plot(time_data, score3, label="推定位置", linewidth=1, marker='.')
     plt.xlabel("時間 [s]")
     plt.ylabel("位置 [m]")
-    plt.xticks(np.array(range(0, 30, 5))*0.1)
-    plt.axis(xmin=0, xmax=2.5, ymin=0, ymax=0.5)
+    plt.xticks(np.array(range(0, 3, 1)))
+    #plt.yticks(np.array(range(1, 6, 1))*0.1)
+    plt.yticks(np.array(range(-10, 10, 1)))
+    #plt.axis(xmin=0, xmax=2.5, ymin=0, ymax=0.5)
+    plt.axis(xmin=0, xmax=2.5, ymin=-1, ymax=1)
     plt.legend()
     plt.show()
-    
     fig = plt.figure(figsize=(13.0, 4.4))
     plt.plot(time_data, score4, label="推定速度", linewidth=1, marker='.')
     plt.plot(time_data, score5, label="速度", linewidth=1, marker='.')
     plt.xlabel("時間 [s]")
     plt.ylabel("速度 [m/s]")
-    plt.axis(xmin=0, xmax=2.5, ymin=-3, ymax=4)
+    plt.xticks(np.array(range(0, 3, 1)))
+    #plt.yticks(np.array(range(-3, 5, 1)))
+    plt.yticks(np.array(range(-10, 10, 2)))
+    #plt.axis(xmin=0, xmax=2.5, ymin=-3, ymax=4)
+    plt.axis(xmin=0, xmax=2.5, ymin=-8, ymax=8)
     plt.legend()
     plt.show()
-    
     fig = plt.figure(figsize=(13.0, 4.4))
     plt.plot(time_data, score2, linewidth=1, marker='.')
     plt.xlabel("時間 [s]")
     plt.ylabel("電圧 [v]")
-    plt.axis(xmin=0, xmax=2.5, ymin=-2, ymax=10.5)
+    plt.xticks(np.array(range(0, 3, 1)))
+    plt.yticks(np.array(range(-5, 15, 5)))
+    plt.axis(xmin=0, xmax=2.5, ymin=-5, ymax=10)
     plt.show()
-
 if __name__=='__main__':
-    for i in range(1, 15, 1):
+
+    for i in [5, 6, 7, 8, 9]:
         input_file = 'datasets/tamura' + str(i)
         data = np.array(pd.read_csv(input_file, delimiter=' \t', header=1))
         time_data = data[:,0] # Time[s]
@@ -55,4 +62,4 @@ if __name__=='__main__':
         score3    = data[:,3] # Expect Pos[m]
         score4    = data[:,4] # Expect Vel[m/s]
         score5    = data[:,5] # Vel[m/s]
-        plot_engine()
+        plot_5_10()

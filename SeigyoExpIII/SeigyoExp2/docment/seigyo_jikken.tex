@@ -451,12 +451,12 @@ while m_right - m_left>0.0001:
   \label{lambda=-10observer}
   (s - \lambda_3)(s - \lambda_4)=s^2-(\lambda_3+\lambda_4)s+\lambda_3 \lambda_4
 \end{equation}
-である．
+である．これらの式を用いて行う実験に用いるパラメータを求め，表\ref{TableB1-2}にまとめた．
 
 \begin{table}[tb]
   \begin{center}
     \label{TableB1-2}
-    \caption{実験}
+    \caption{制御実験に使用したパラメータ}
     \begin{tabular}{|c|c|c|c|c|c|c|c|} \hline
       $\lambda_1$ & $\lambda_2$ & $\lambda_3$ & $\lambda_4$  & $f_1$ & $f_2$ & $k_1$ & $k_2$\\ \hline \hline
       $-10$ & $-10$ & $-10$ & $-10$ & $38.5743$  & $5.7238$  & $14.8384$  & $23.4101$  \\ \hline
@@ -476,6 +476,7 @@ while m_right - m_left>0.0001:
     \end{tabular}
   \end{center}
 \end{table}
+結果は図\ref{Exp1-1}-\ref{Exp14-3}となった．
 
 \clearpage
 \newpage
@@ -484,21 +485,21 @@ while m_right - m_left>0.0001:
 \begin{figure}[H]
   \begin{center}
     \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp1-1.png}
-    \caption{}
+    \caption{$\lambda=-10, -10, -10, -10$のときの位置・推定位置}
     \label{Exp1-1}
   \end{center}
 \end{figure}
 \begin{figure}[H]
   \begin{center}
     \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp1-2.png}
-    \caption{}
+    \caption{$\lambda=-10, -10, -10, -10$のときの速度・推定速度}
     \label{Exp1-2}
   \end{center}
 \end{figure}
 \begin{figure}[H]
   \begin{center}
     \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp1-3.png}
-    \caption{}
+    \caption{$\lambda=-10, -10, -10, -10$のときの入力電圧}
     \label{Exp1-3}
   \end{center}
 \end{figure}
@@ -506,21 +507,21 @@ while m_right - m_left>0.0001:
 \begin{figure}[H]
   \begin{center}
     \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp2-1.png}
-    \caption{}
+    \caption{$\lambda=-30, -30, -10, -10$のときの位置・推定位置}
     \label{Exp2-1}
   \end{center}
 \end{figure}
 \begin{figure}[H]
   \begin{center}
     \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp2-2.png}
-    \caption{}
+    \caption{$\lambda=-30, -30, -10, -10$のときの速度・推定速度}
     \label{Exp2-2}
   \end{center}
 \end{figure}
 \begin{figure}[H]
   \begin{center}
     \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp2-3.png}
-    \caption{}
+    \caption{$\lambda=-30, -30, -10, -10$のときの入力電圧}
     \label{Exp2-3}
   \end{center}
 \end{figure}
@@ -528,21 +529,21 @@ while m_right - m_left>0.0001:
 \begin{figure}[H]
   \begin{center}
     \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp3-1.png}
-    \caption{}
+    \caption{$\lambda=-10, -10, -30, -30$のときの位置・推定位置}
     \label{Exp3-1}
   \end{center}
 \end{figure}
 \begin{figure}[H]
   \begin{center}
     \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp3-2.png}
-    \caption{}
+    \caption{$\lambda=-10, -10, -30, -30$のときの速度・推定速度}
     \label{Exp3-2}
   \end{center}
 \end{figure}
 \begin{figure}[H]
   \begin{center}
     \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp3-3.png}
-    \caption{}
+    \caption{$\lambda=-10, -10, -30, -30$のときの入力電圧}
     \label{Exp3-3}
   \end{center}
 \end{figure}
@@ -550,21 +551,21 @@ while m_right - m_left>0.0001:
 \begin{figure}[H]
   \begin{center}
     \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp4-1.png}
-    \caption{}
+    \caption{$\lambda=10, 10, -10, -10$のときの位置・推定位置}
     \label{Exp4-1}
   \end{center}
 \end{figure}
 \begin{figure}[H]
   \begin{center}
     \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp4-2.png}
-    \caption{}
+    \caption{$\lambda=10, 10, -10, -10$のときの速度・推定速度}
     \label{Exp4-2}
   \end{center}
 \end{figure}
 \begin{figure}[H]
   \begin{center}
     \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp4-3.png}
-    \caption{}
+    \caption{$\lambda=10, 10, -10, -10$のときの入力電圧}
     \label{Exp4-3}
   \end{center}
 \end{figure}
@@ -572,21 +573,21 @@ while m_right - m_left>0.0001:
 \begin{figure}[H]
   \begin{center}
     \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp5-1.png}
-    \caption{}
+    \caption{$\lambda=-10, -10, 10, 10$のときの位置・推定位置}
     \label{Exp5-1}
   \end{center}
 \end{figure}
 \begin{figure}[H]
   \begin{center}
     \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp5-2.png}
-    \caption{}
+    \caption{$\lambda=-10, -10, 10, 10$のときの速度・推定速度}
     \label{Exp5-2}
   \end{center}
 \end{figure}
 \begin{figure}[H]
   \begin{center}
     \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp5-3.png}
-    \caption{}
+    \caption{$\lambda=-10, -10, 10, 10$のときの入力電圧}
     \label{Exp5-3}
   \end{center}
 \end{figure}
@@ -594,21 +595,21 @@ while m_right - m_left>0.0001:
 \begin{figure}[H]
   \begin{center}
     \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp6-1.png}
-    \caption{}
+    \caption{$\lambda=-10, -10, 0, 0$のときの位置・推定位置}
     \label{Exp6-1}
   \end{center}
 \end{figure}
 \begin{figure}[H]
   \begin{center}
     \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp6-2.png}
-    \caption{}
+    \caption{$\lambda=-10, -10, 0, 0$のときの速度・推定速度}
     \label{Exp6-2}
   \end{center}
 \end{figure}
 \begin{figure}[H]
   \begin{center}
     \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp6-3.png}
-    \caption{}
+    \caption{$\lambda=-10, -10, 0, 0$のときの入力電圧}
     \label{Exp6-3}
   \end{center}
 \end{figure}
@@ -616,21 +617,21 @@ while m_right - m_left>0.0001:
 \begin{figure}[H]
   \begin{center}
     \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp7-1.png}
-    \caption{}
+    \caption{$\lambda=0, 0, -10, -10$のときの位置・推定位置}
     \label{Exp7-1}
   \end{center}
 \end{figure}
 \begin{figure}[H]
   \begin{center}
     \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp7-2.png}
-    \caption{}
+    \caption{$\lambda=0, 0, -10, -10$のときの速度・推定速度}
     \label{Exp7-2}
   \end{center}
 \end{figure}
 \begin{figure}[H]
   \begin{center}
     \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp7-3.png}
-    \caption{}
+    \caption{$\lambda=0, 0, -10, -10$のときの入力電圧}
     \label{Exp7-3}
   \end{center}
 \end{figure}
@@ -638,21 +639,21 @@ while m_right - m_left>0.0001:
 \begin{figure}[H]
   \begin{center}
     \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp8-1.png}
-    \caption{}
+    \caption{$\lambda=-10, -10, 30, 30$のときの位置・推定位置}
     \label{Exp8-1}
   \end{center}
 \end{figure}
 \begin{figure}[H]
   \begin{center}
     \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp8-2.png}
-    \caption{}
+    \caption{$\lambda=-10, -10, 30, 30$のときの速度・推定速度}
     \label{Exp8-2}
   \end{center}
 \end{figure}
 \begin{figure}[H]
   \begin{center}
     \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp8-3.png}
-    \caption{}
+    \caption{$\lambda=-10, -10, 30, 30$のときの入力電圧}
     \label{Exp8-3}
   \end{center}
 \end{figure}
@@ -660,21 +661,21 @@ while m_right - m_left>0.0001:
 \begin{figure}[H]
   \begin{center}
     \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp9-1.png}
-    \caption{}
+    \caption{$\lambda=-5, -5, -5, -5$のときの位置・推定位置}
     \label{Exp9-1}
   \end{center}
 \end{figure}
 \begin{figure}[H]
   \begin{center}
     \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp9-2.png}
-    \caption{}
+    \caption{$\lambda=-5, -5, -5, -5$のときの速度・推定速度}
     \label{Exp9-2}
   \end{center}
 \end{figure}
 \begin{figure}[H]
   \begin{center}
     \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp9-3.png}
-    \caption{}
+    \caption{$\lambda=-5, -5, -5, -5$のときの入力電圧}
     \label{Exp9-3}
   \end{center}
 \end{figure}
@@ -682,21 +683,21 @@ while m_right - m_left>0.0001:
 \begin{figure}[H]
   \begin{center}
     \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp10-1.png}
-    \caption{}
+    \caption{$\lambda=-5, -5, -10, -10$のときの位置・推定位置}
     \label{Exp10-1}
   \end{center}
 \end{figure}
 \begin{figure}[H]
   \begin{center}
     \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp10-2.png}
-    \caption{}
+    \caption{$\lambda=-5, -5, -10, -10$のときの速度・推定速度}
     \label{Exp10-2}
   \end{center}
 \end{figure}
 \begin{figure}[H]
   \begin{center}
     \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp10-3.png}
-    \caption{}
+    \caption{$\lambda=-5, -5, -10, -10$のときの入力電圧}
     \label{Exp10-3}
   \end{center}
 \end{figure}
@@ -704,21 +705,21 @@ while m_right - m_left>0.0001:
 \begin{figure}[H]
   \begin{center}
     \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp11-1.png}
-    \caption{}
+    \caption{$\lambda=-20, -20, -20, -20$のときの位置・推定位置}
     \label{Exp11-1}
   \end{center}
 \end{figure}
 \begin{figure}[H]
   \begin{center}
     \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp11-2.png}
-    \caption{}
+    \caption{$\lambda=-20, -20, -20, -20$のときの速度・推定速度}
     \label{Exp11-2}
   \end{center}
 \end{figure}
 \begin{figure}[H]
   \begin{center}
     \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp11-3.png}
-    \caption{}
+    \caption{$\lambda=-20, -20, -20, -20$のときの入力電圧}
     \label{Exp11-3}
   \end{center}
 \end{figure}
@@ -726,21 +727,21 @@ while m_right - m_left>0.0001:
 \begin{figure}[H]
   \begin{center}
     \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp12-1.png}
-    \caption{}
+    \caption{$\lambda=-20, -20, -30, -30$のときの位置・推定位置}
     \label{Exp12-1}
   \end{center}
 \end{figure}
 \begin{figure}[H]
   \begin{center}
     \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp12-2.png}
-    \caption{}
+    \caption{$\lambda=-20, -20, -30, -30$のときの速度・推定速度}
     \label{Exp12-2}
   \end{center}
 \end{figure}
 \begin{figure}[H]
   \begin{center}
     \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp12-3.png}
-    \caption{}
+    \caption{$\lambda=-20, -20, -30, -30$のときの入力電圧}
     \label{Exp12-3}
   \end{center}
 \end{figure}
@@ -748,21 +749,21 @@ while m_right - m_left>0.0001:
 \begin{figure}[H]
   \begin{center}
     \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp13-1.png}
-    \caption{}
+    \caption{$\lambda=-15, -15, -20, -20$のときの位置・推定位置}
     \label{Exp13-1}
   \end{center}
 \end{figure}
 \begin{figure}[H]
   \begin{center}
     \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp13-2.png}
-    \caption{}
+    \caption{$\lambda=-15, -15, -20, -20$のときの速度・推定速度}
     \label{Exp13-2}
   \end{center}
 \end{figure}
 \begin{figure}[H]
   \begin{center}
     \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp13-3.png}
-    \caption{}
+    \caption{$\lambda=-15, -15, -20, -20$のときの入力電圧}
     \label{Exp13-3}
   \end{center}
 \end{figure}
@@ -770,21 +771,21 @@ while m_right - m_left>0.0001:
 \begin{figure}[H]
   \begin{center}
     \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp14-1.png}
-    \caption{}
+    \caption{$\lambda=-10, -10, -10, -10$のときの位置・推定位置}
     \label{Exp14-1}
   \end{center}
 \end{figure}
 \begin{figure}[H]
   \begin{center}
     \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp14-2.png}
-    \caption{}
+    \caption{$\lambda=-10, -10, -10, -10$のときの速度・推定速度}
     \label{Exp14-2}
   \end{center}
 \end{figure}
 \begin{figure}[H]
   \begin{center}
     \includegraphics[clip,width=13.0cm, height=4.4cm]{../img/Exp14-3.png}
-    \caption{}
+    \caption{$\lambda=-10, -10, -10, -10$のときの入力電圧}
     \label{Exp14-3}
   \end{center}
 \end{figure}
@@ -822,13 +823,14 @@ while m_right - m_left>0.0001:
     \end{equation}
   \end{description}
 である．したがって，制御とオブザーバのダイナミクスは独立に考えてよく，それぞれの系が安定であれば併合系も安定となり，双方のゲインは独立に設計が可能であることが分かる．これは制御と観測に関する分離定理として知られている\ref{bibitemMechatoronics}．
-\begin{equation}
-\end{equation}
+
   \item[(2)] 制御結果について考察し，収束速度を上げる．過渡応答の振動を抑える，もしくは入力量を抑えるような結果を得るためには，制御系をどのように改良すればよいか検討せよ．
+  オブザーバの目的は状態を推定して状態フィードバックを実現させることにある．このためには，状態推定値の真値への収束は十分に速くしなければならない．つまり，オブザーバの極は状態フィードバック系の極よりも十分に虚軸から離れなければならない．通常オブザーバ極の大きさは状態フィードバック系の極の２〜５倍にする\ref{bibitemGendai}．
 \end{description}
 
 \begin{thebibliography}{9}
   \bibitem{bibitemMechatoronics} 坂本哲三，電気機器の電気力学と制御，p157，p158，2018．
+  \bibitem{bibitemGendai} 劉康志ら，現代制御理論通論，p121，2006．
 \end{thebibliography}
 
 \end{document}
