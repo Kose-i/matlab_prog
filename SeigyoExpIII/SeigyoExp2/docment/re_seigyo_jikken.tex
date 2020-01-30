@@ -1,0 +1,146 @@
+\documentclass[12pt]{jsarticle}
+
+\setcounter{secnumdepth}{3}
+%\setcounter{figure}{1}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{bm}
+\usepackage{listings}
+
+\pagestyle{myheadings}
+
+\usepackage{titlesec}
+\usepackage{cases}
+\titleformat*{\section}{\large}
+\titleformat*{\subsection}{\normalsize\bf}
+\setcounter{equation}{25}
+\setcounter{section}{5}
+
+\begin{document}
+台車の等価質量$M$[kg]，レールとの間の摩擦係数$F$[N]は次のように求められる．
+\begin{eqnarray}
+  \label{StepResponse_calculate_M}
+  M &=& \frac{\alpha h}{a_0} \\
+    &=& 8.12057 \nonumber
+\end{eqnarray}
+\begin{eqnarray}
+  \label{StepResponse_calculate_F}
+  F &=& M a_1\\
+    &=& 34.82427 \nonumber
+\end{eqnarray}
+また，時間応答に用いるパラメータは次のように求められる．
+\begin{eqnarray}
+  \label{StepResponse_calculate_omega_n}
+  \omega_n &=& \sqrt{a_0} \\
+           &=& 4.973897 \nonumber
+\end{eqnarray}
+\begin{eqnarray}
+  \label{StepResponse_calculate_zeta}
+  \zeta &=& \frac{a_1}{2\sqrt{a_0}} \\
+        &=& 0.431091 \nonumber
+\end{eqnarray}
+\begin{eqnarray}
+  \label{StepResponse_calculate_beta}
+  \beta &=& \zeta \omega_n \\
+        &=& 2.144202 \nonumber
+\end{eqnarray}
+\begin{eqnarray}
+  \label{StepResponse_calculate_gamma}
+  \gamma &=& \omega_n\sqrt{1-\zeta^2} \\
+         &=& 4.487990 \nonumber
+\end{eqnarray}
+\begin{eqnarray}
+  \label{StepResponse_calculate_delta}
+  \delta &=& {\rm tan}^{-1}\left(\frac{\zeta}{\sqrt{1-\zeta^2}}\right) \\
+         &=& 0.445702 \nonumber
+\end{eqnarray}
+これより，時間応答は次のようになる．
+\begin{eqnarray}
+  \label{Response_y_t}
+  y(t) &=& y_0\left(1 - \frac{1}{\sqrt{1-\zeta^2}}e^{-\beta t}{\rm cos}(\gamma t - \delta)\right) \\
+       &=& 0.394657\left(1 - 1.22827e^{-2.1442 t}{\rm cos}(4.48799 t - 0.445701)\right) \nonumber
+\end{eqnarray}
+実験データと求められた時間応答$y(t)$の相対誤差の平均を式(\ref{Error-mean})を用いて求める．ただし，$x(t)$は実験データを表す．誤差の平均は$3.1668{\rm [\%]}$となった．
+\begin{equation}
+  \label{Error-mean}
+  E = \frac{1}{26}\Sigma_{t=0}^{t=2.5}\frac{|y(t) - x(t)|}{y(t)}
+\end{equation}
+
+\clearpage
+\setcounter{equation}{41}
+\newpage
+状態方程式より可制御性についての特性方程式は
+\begin{eqnarray}
+  \label{regulator-poll-equation}
+  {\rm det}(s{\bm I} - ({\bm A}-{\bm b}{\bm f}))&=&s(s+5.1616+2.5924f_2)+2.5924f_1 \nonumber \\
+  &=& s^2 + (5.1616+2.5924f_2)s + 2.5924f_1
+\end{eqnarray}
+であり，可観測性についての特性多項式は
+\begin{eqnarray}
+  \label{observer-poll-equation}
+  {\rm det}(s{\bm I} - ({\bm A}-{\bm K}{\bm c}))&=& (s+k_1)(s+5.1616)+k_2\nonumber \\
+  &=& s^2 + (5.1616+k_1)s + (5.1616k_1 + k_2)
+\end{eqnarray}
+である．
+極配置法による可制御性についての特性多項式は
+\begin{equation}
+  \label{lambda=-10regletor}
+  (s - \lambda_1)(s - \lambda_2)=s^2-(\lambda_1+\lambda_2)s+\lambda_1 \lambda_2
+\end{equation}
+であり，可観測性についての特性多項式は
+\begin{equation}
+  \label{lambda=-10observer}
+  (s - \lambda_3)(s - \lambda_4)=s^2-(\lambda_3+\lambda_4)s+\lambda_3 \lambda_4
+\end{equation}
+である．
+これらの式より，係数比較を行うことにより，次の関係式を示すことができる．
+\begin{numcases}
+  {}
+  f_1 = -\frac{\lambda_1 \lambda_2}{2.5924} & \\
+  f_2 = -\frac{\lambda_1 + \lambda_2 - 5.1616}{2.5924} &
+\end{numcases}
+
+\begin{numcases}
+  {}
+  k_1 = - \lambda_3 - \lambda_4 - 5.1616 & \\
+  k_2 = \lambda_3 \lambda_4 - 5.1616k_1 &
+\end{numcases}
+これらの式を用いて実験に用いるパラメータを求め，表\ref{TableB1-2}にまとめた．
+\begin{table}[H]
+  \begin{center}
+    \label{TableB1-2}
+    \caption{制御実験に使用したパラメータ}
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|} \hline
+      実験番号 & $\lambda_1$ & $\lambda_2$ & $\lambda_3$ & $\lambda_4$  & $f_1$ & $f_2$ & $k_1$ & $k_2$ & 図\\ \hline \hline
+      1 & $-10$ & $-10$ & $-10$ & $-10$ & $38.5743$  & $5.7238$  & $14.8384$  & $23.4101$ & 13-15 \\ \hline
+      2 & $-30$ & $-30$ & $-10$ & $-10$ & $347.1686$ & $21.1535$ & $14.8384$  & $23.4101$  & 16-18\\ \hline
+      3 &$-5$  & $-5$  & $-10$ & $-10$ & $9.6436$   & $1.8664$  & $14.8384$  & $23.4101$   & 43-45\\ \hline
+      4 &$-20$ & $-20$ & $-20$ & $-20$ & $154.2972$ & $13.4387$ & $34.8384$  & $220.1781$  & 46-48\\ \hline
+      5 &$-20$ & $-20$ & $-30$ & $-30$ & $154.2972$ & $13.4387$ & $54.8384$  & $616.9461$  & 49-51\\ \hline
+    \end{tabular}
+  \end{center}
+\end{table}
+
+\newpage
+
+\section{考察}
+　実験番号5について，フィードバックゲインの極の位置を$-20$より小さくすると，定常応答の振動が見られる．これは，目標値に対して，操作量が大きくなるためである．
+　しかし，実験番号4，5を比較すると，実験番号2は実験番号5に比べ，オブザーバの極が実軸に近いため，入力電圧が大きく変化せず，定常応答の振動が見られなかった．
+　実験番号1，3を比較すると，3の入力電圧の最大値は小さくなることが分かる．また，速度についても小さな結果となった．
+　実験番号1，2を比較すると，整定時間はあまり変わらない結果となった．これは入力電圧の最大値が10[V]であるためである．
+\section{課題}
+\begin{description}
+  \item[(2)] 制御結果について考察し，収束速度を上げる．過渡応答の振動を抑える，もしくは入力量を抑えるような結果を得るためには，制御系をどのように改良すればよいか検討せよ．\\
+  極の値だけで制御されたシステムの挙動が決まるわけではないが，極の値を選ぶための一般的な指針は以下の通りである．極の実部を負の大きな値に取れば，目標値への収束を速くすることができる．ただし，その分，ゲイン$K$が大きくなり，必要な入力$u(t)$が増大することが多い．一方，極の虚部によって，状態$x(t)$の振動的応答を操作できる．実部の大きさに対して虚部の大きさを小さくすることで過大なオーバーシュートを抑制できるが，ある程度の大きさの虚部を与えることで，出力など一部の状態変数の応答を速くすることが可能である\cite{bibitem_pendrol}．
+  そのため，収束速度を上げるためには，オブザーバの極とフィードバックゲインの極の値を大きくすることが必要である．ただし，オブザーバの極の実部がフィードバックゲインの極の実部より小さくなければならない．過渡応答の振動を抑えるためには，フィードバックゲインの極とオブザーバの極の虚部が小さくなければならない．入力量の最大値を抑えるためには，フィードバックゲインの極の実部が実軸の近傍になければならない．
+\end{description}
+
+\begin{thebibliography}{9}
+  \bibitem{bibitemMechatoronics} 坂本哲三，電気機器の電気力学と制御，p157，p158，2018．
+  \bibitem{bibitemGendai} 劉康志ら，現代制御理論通論，p121，2006．
+%  \bibitem{bibitemFirstGendai} はじめての現代制御p161，p162
+  \bibitem{bibitem_pendrol} 川田昌克ら，倒立振子で学ぶ制御工学，p88，2017．
+\end{thebibliography}
+
+\end{document}
